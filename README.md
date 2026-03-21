@@ -2,6 +2,12 @@
 
 This repository contains all the skills, rules, and agents for my personal vibe coding setup.
 
+## Installation
+
+```bash
+npx skills@latest add https://github.com/akathecoder/agentic-setup --all
+```
+
 ## Skills
 
 Skills are invoked by Claude Code using `/skill-name` or triggered automatically based on context.
