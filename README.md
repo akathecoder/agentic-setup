@@ -26,3 +26,12 @@ Create distinctive, production-grade frontend interfaces. Use for web components
 
 ### `grill-me`
 Interview the user relentlessly about a plan or design until reaching a shared understanding. Walks down every branch of the decision tree and resolves dependencies between decisions one by one. Use to stress-test a plan before committing to it.
+
+### `deslop`
+Remove AI-generated code slop from a branch. Diffs against main and strips unnecessary comments, defensive try/catch blocks, `any` casts, and deeply-nested code that should use early returns. Keeps behavior unchanged and edits minimal.
+
+### `what-did-i-get-done`
+Summarize authored commits over a user-specified time range into a concise status update suitable for Slack. Excludes merge commits and cosmetic-only changes; focuses on substantial behavior and architecture changes.
+
+### `check-compiler-errors`
+Run the repo's compile and type-check commands, summarize failures by file and category, fix the highest-confidence issues, and re-run until clean or blocked.
