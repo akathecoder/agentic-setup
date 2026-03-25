@@ -28,9 +28,12 @@ Check that the current branch matches the PR's head branch:
 gh pr view <number> -R {owner}/{repo} --json headRefName -q '.headRefName'
 ```
 
-Compare against `git branch --show-current`. If they don't match, **stop** and tell the user:
+Compare against `git branch --show-current`. If they don't match, use the AskQuestion tool to warn the user and ask whether to continue:
 
-> "You need to be on the PR branch to apply suggestions. Run: `gh pr checkout <number>` (or `gh pr checkout <number> -R {owner}/{repo}` for cross-repo PRs)."
+> "Your local branch `<local branch>` doesn't match the PR branch `<pr branch>`. Do you still want to apply suggestions to your current branch?"
+
+- **Yes**: Proceed with the implementation on the current local branch. Ignore the branch mismatch.
+- **No**: Stop and tell the user: "Switch to the PR branch and try again."
 
 ### Step 2: Fetch Suggestions
 
