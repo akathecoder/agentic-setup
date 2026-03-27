@@ -8,6 +8,7 @@ This repo is a collection of Claude Code **skills** and **rules** — no build s
 
 - `skills/<name>/SKILL.md` — the skill definition. Must include YAML frontmatter with `name` and `description`.
 - `skills/<name>/*.md` — optional supporting reference files a skill can read (e.g., `tdd/` has `mocking.md`, `tests.md`, etc.).
+- `agents/<name>.md` — autonomous agents that orchestrate multi-step work. `tech-lead` is the entry point; it dispatches all others.
 - `rules/<name>.md` — global rules loaded into every Claude Code session.
 - `CLAUDE.md` — this file, loaded into every session in this repo.
 - `README.md` — user-facing documentation. Keep it up to date (see rule below).

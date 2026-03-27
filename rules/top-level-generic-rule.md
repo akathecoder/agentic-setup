@@ -27,6 +27,10 @@ Never mark a task complete without proving it works. Run tests, check logs, and 
 
 When given a bug report: just fix it. Use logs, errors, and failing tests to diagnose. Fix failing CI automatically. Require zero context switching from the user.
 
+## Git
+
+Never commit or push changes unless the user explicitly asks. Leave all changes unstaged in the working tree.
+
 ## Code Quality
 
 For non-trivial changes, ask: "Is there a more elegant solution?" If a fix feels hacky, step back and implement the right solution. Skip for simple fixes — don't over-engineer. Make every change as simple as possible and minimize code impact. Find root causes; avoid temporary fixes.

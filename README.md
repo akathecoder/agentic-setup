@@ -32,11 +32,25 @@ Skills are invoked by Claude Code using `/skill-name` or triggered internalmatic
 | `find-notion-doc`               | internal | Resolve the correct Notion project page for the current project. Checks agent memory first, then navigates Notion to find the matching subpage. Used internally by other skills.                                     |
 | `find-confluence-doc`           | internal | Resolve the correct Confluence page for the current project. Returns the page ID, space key, and URL. Used internally by other skills.                                                                               |
 
+## Agents
+
+Agents in `agents/` are autonomous, long-running units that orchestrate multi-step work. The Tech Lead is the entry point — it dispatches all others.
+
+| Agent         | Description                                                                                                                                                                 |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tech-lead`   | Orchestrator. Fetches a Jira/Notion ticket, drives the full implementation loop, maintains `tasks/project-log.md`, and escalates to the user after 10 failed QA iterations. |
+| `planner`     | Breaks a ticket into a file-level implementation plan. Runs once before any code is written.                                                                                |
+| `test-writer` | Writes tests against the ticket spec before Dev implements. Tests must fail initially.                                                                                      |
+| `dev`         | Implements code to make tests pass. On subsequent iterations, addresses Reviewer findings and QA failures.                                                                  |
+| `reviewer`    | Reviews the current diff as a staff engineer. Posts findings to `tasks/project-log.md` by severity.                                                                         |
+| `qa`          | Runs the full test suite, validates acceptance criteria, and reports PASS/FAIL to the Tech Lead.                                                                            |
+| `wrap-up`     | Runs after QA passes. Produces `tasks/handoff.md` covering everything implemented, tested, fixed, broken, and flagged — including security and compliance concerns.         |
+
 ## Rules
 
 Rules in `rules/` are loaded globally and govern agent behavior across all sessions.
 
-| Rule                          | Description                                                                                                                                                                 |
-| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sync-task-status-to-tickets` | Whenever a task status changes (started, completed, blocked, deferred), update the linked Notion or Jira ticket immediately and leave a brief comment summarizing progress. |
-| `top-level-generic-rule` | Base CLAUDE.md template to drop into any coding project. Covers planning, subagent strategy, task management, verification, bug fixing, and code quality. Refine per-project as needed. |
+| Rule                          | Description                                                                                                                                                                             |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sync-task-status-to-tickets` | Whenever a task status changes (started, completed, blocked, deferred), update the linked Notion or Jira ticket immediately and leave a brief comment summarizing progress.             |
+| `top-level-generic-rule`      | Base CLAUDE.md template to drop into any coding project. Covers planning, subagent strategy, task management, verification, bug fixing, and code quality. Refine per-project as needed. |
