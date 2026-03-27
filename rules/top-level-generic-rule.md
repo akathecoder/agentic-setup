@@ -4,7 +4,7 @@ This file provides guidance to the AI coding agent when working with code in thi
 
 ## Planning
 
-Enter plan mode for any non-trivial task (3+ steps or architectural decisions). Write detailed specs upfront to reduce ambiguity. If something goes wrong, stop and re-plan immediately — don't keep pushing. Use plan mode for verification steps, not just building.
+Enter plan mode for any non-trivial task (3+ steps or architectural decisions). Write detailed specs upfront to reduce ambiguity. If something goes wrong, stop and re-plan immediately — don't keep pushing. Use plan mode for verification steps, not just building. Write detailed specs upfront to reduce ambiguity.
 
 ## Subagents
 
@@ -21,7 +21,7 @@ Use subagents to keep the main context window clean. Offload research, explorati
 
 ## Verification
 
-Never mark a task complete without proving it works. Run tests, check logs, and demonstrate correctness. Diff behavior between main and your changes when relevant.
+Never mark a task complete without proving it works. Run tests, check logs, and demonstrate correctness. Ask yourself: “Would a staff engineer approve this?”
 
 ## Bug Fixing
 
