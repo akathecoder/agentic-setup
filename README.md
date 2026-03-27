@@ -5,39 +5,37 @@ This repository contains all the skills, rules, and agents for my personal vibe 
 ## Installation
 
 ```bash
-npx skills@latest add https://github.com/akathecoder/agentic-setup --all
+npx skills@latest add https://github.com/akathecoder/agentic-setup
 ```
 
 ## Skills
 
-Skills are invoked by Claude Code using `/skill-name` or triggered automatically based on context.
+Skills are invoked by Claude Code using `/skill-name` or triggered internalmatically based on context.
 
-### `write-a-prd`
-Create a PRD through user interview, codebase exploration, and module design. Conducts a structured interview, sketches major modules, and publishes the finished PRD as a Notion page under the appropriate project. Falls back to a local markdown file if Notion MCP is unavailable.
+| Skill                           | Type     | Description                                                                                                                                                                                                          |
+| ------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `write-a-prd`                   | generic  | Create a PRD through user interview, codebase exploration, and module design. Publishes to Notion; falls back to a local markdown file if Notion MCP is unavailable.                                                 |
+| `prd-to-issues`                 | generic  | Break a PRD into independently-grabbable vertical slices and create them as Kanban tasks in a Notion board. Classifies each task as AFK or HITL and maps dependencies.                                               |
+| `review-pr`                     | generic  | Thoroughly review a GitHub PR for correctness, security, design, testing, performance, and readability. Produces a structured review with severity-tiered findings. Does not post to GitHub unless explicitly asked. |
+| `implement-ai-suggestions`      | generic  | Fetch suggestions from a GitHub Copilot review and apply the good ones locally. Triages structured code suggestions and prose feedback; leaves changes unstaged.                                                     |
+| `improve-codebase-architecture` | generic  | Surface architectural friction in a codebase and propose module-deepening refactors. Spawns parallel sub-agents to design alternative interfaces and creates a refactor RFC as a GitHub issue.                       |
+| `tdd`                           | generic  | Test-driven development with the red-green-refactor loop. Focuses on vertical slices, behavior-driven integration tests, and clean interface design.                                                                 |
+| `frontend-design`               | generic  | Create distinctive, production-grade frontend interfaces for web components, landing pages, dashboards, or React components.                                                                                         |
+| `grill-me`                      | generic  | Interview the user relentlessly about a plan or design until reaching shared understanding. Resolves every branch of the decision tree before stopping.                                                              |
+| `deslop`                        | internal | Remove AI-generated slop from a branch — unnecessary comments, defensive try/catch blocks, `any` casts, and deeply-nested code. Keeps behavior unchanged.                                                            |
+| `what-did-i-get-done`           | generic  | Summarize authored commits over a time range into a concise Slack-ready status update. Excludes merge commits and cosmetic-only changes.                                                                             |
+| `check-compiler-errors`         | internal | Run compile and type-check commands, summarize failures by file and category, fix the highest-confidence issues, and re-run until clean or blocked.                                                                  |
+| `wrap-up`                       | generic  | Generate an end-of-session handoff summary: what was accomplished, hacks taken, incomplete todos, and recommended next steps. Chat-only — no file or git mutations.                                                  |
+| `write-a-prd-dcx`               | work     | Variant of `write-a-prd` for DCX projects. Publishes the finished PRD to Confluence instead of Notion.                                                                                                               |
+| `prd-to-issues-dcx`             | work     | Variant of `prd-to-issues` for DCX projects. Reads PRDs from Confluence and creates a Jira Epic with child issues instead of a Notion board.                                                                         |
+| `fetch-gh-pr`                   | internal | Fetch comprehensive GitHub PR data (metadata, diff, CI checks, inline comments) as structured markdown. Used internally by `review-pr` and `implement-ai-suggestions`.                                               |
+| `find-notion-doc`               | internal | Resolve the correct Notion project page for the current project. Checks agent memory first, then navigates Notion to find the matching subpage. Used internally by other skills.                                     |
+| `find-confluence-doc`           | internal | Resolve the correct Confluence page for the current project. Returns the page ID, space key, and URL. Used internally by other skills.                                                                               |
 
-### `prd-to-issues`
-Break a PRD into independently-grabbable vertical slices (tracer bullets) and create them as Kanban tasks in a Notion board. Classifies each task as AFK (no human needed) or HITL (requires human input), maps dependencies, and creates the tasks inside the project's Notion database.
+## Rules
 
-### `find-notion-doc`
-Utility skill used by other skills to resolve the correct Notion project page for the current project. Checks agent memory first (cached from prior lookups), then navigates the root Notion Projects page to find the matching subpage. Saves the result to memory for future use.
+Rules in `rules/` are loaded globally and govern agent behavior across all sessions.
 
-### `improve-codebase-architecture`
-Explore a codebase to surface architectural friction and propose module-deepening refactors. Identifies shallow, tightly-coupled modules, spawns parallel sub-agents to design multiple alternative interfaces, and creates a refactor RFC as a GitHub issue.
-
-### `tdd`
-Test-driven development with the red-green-refactor loop. Emphasises vertical slices (one test → one implementation at a time), behavior-focused integration tests over implementation-detail tests, and clean interface design for testability.
-
-### `frontend-design`
-Create distinctive, production-grade frontend interfaces. Use for web components, landing pages, dashboards, React components, or any UI work that needs polished, non-generic design.
-
-### `grill-me`
-Interview the user relentlessly about a plan or design until reaching a shared understanding. Walks down every branch of the decision tree and resolves dependencies between decisions one by one. Use to stress-test a plan before committing to it.
-
-### `deslop`
-Remove AI-generated code slop from a branch. Diffs against main and strips unnecessary comments, defensive try/catch blocks, `any` casts, and deeply-nested code that should use early returns. Keeps behavior unchanged and edits minimal.
-
-### `what-did-i-get-done`
-Summarize authored commits over a user-specified time range into a concise status update suitable for Slack. Excludes merge commits and cosmetic-only changes; focuses on substantial behavior and architecture changes.
-
-### `check-compiler-errors`
-Run the repo's compile and type-check commands, summarize failures by file and category, fix the highest-confidence issues, and re-run until clean or blocked.
+| Rule                          | Description                                                                                                                                                                 |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sync-task-status-to-tickets` | Whenever a task status changes (started, completed, blocked, deferred), update the linked Notion or Jira ticket immediately and leave a brief comment summarizing progress. |

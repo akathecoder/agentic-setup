@@ -7,6 +7,7 @@ Whenever a task is being worked on and its status changes, the corresponding iss
 ## When This Rule Applies
 
 This rule applies any time an agent:
+
 - Starts work on a task (status: In Progress)
 - Completes a task (status: Done)
 - Blocks on a task (status: Blocked)
@@ -22,12 +23,12 @@ This rule applies any time an agent:
 
 2. **Update on every status change**: Each time the task status changes, update the linked ticket immediately — do not batch updates.
 
-   | Task Status     | Ticket Status to Set  |
-   |-----------------|----------------------|
-   | Starting work   | In Progress          |
-   | Completed       | Done                 |
-   | Blocked         | Blocked              |
-   | Deferred        | To Do / Backlog      |
+   | Task Status   | Ticket Status to Set |
+   | ------------- | -------------------- |
+   | Starting work | In Progress          |
+   | Completed     | Done                 |
+   | Blocked       | Blocked              |
+   | Deferred      | To Do / Backlog      |
 
 3. **Add a comment**: When updating the ticket status, also leave a brief comment summarizing what was done or what the blocker is. Keep it factual and concise (1–3 sentences).
 
