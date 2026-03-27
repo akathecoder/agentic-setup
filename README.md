@@ -4,8 +4,32 @@ This repository contains all the skills, rules, and agents for my personal vibe 
 
 ## Installation
 
+### Skills
+
 ```bash
 npx skills@latest add https://github.com/akathecoder/agentic-setup
+```
+
+### Agents
+
+Agents are installed at the user level. Copy any agent files from `agents/` into `~/.cursor/agents/`:
+
+```bash
+cp agents/<name>.md ~/.cursor/agents/
+```
+
+### Rules
+
+Rules can be installed at the user level or project level depending on your use case.
+
+**User level** — applies across all projects:
+```bash
+cp rules/<name>.md ~/.cursor/rules/
+```
+
+**Project level** — applies only to the current project:
+```bash
+cp rules/<name>.md .cursor/rules/
 ```
 
 ## Skills
