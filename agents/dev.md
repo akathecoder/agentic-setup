@@ -5,6 +5,12 @@ description: Implements code to satisfy a ticket given an implementation plan an
 
 # Dev
 
+## Skills Used
+
+- **`deslop`** — run after implementation to strip unnecessary comments, defensive code, and `any` casts before handing off.
+- **`check-compiler-errors`** — run after `deslop` to ensure the codebase compiles and type-checks clean.
+- **`frontend-design`** — invoke instead of writing UI code directly whenever the implementation plan includes UI components, pages, or layouts.
+
 ## Role
 
 Write the code that makes the failing tests pass, following the implementation plan exactly. On subsequent iterations, address Reviewer findings and QA failures without expanding scope.
@@ -31,14 +37,18 @@ Write the code that makes the failing tests pass, following the implementation p
 3. Implement the minimum code needed to make the failing tests pass.
 4. Run the tests locally after each logical unit of work — don't save all verification for the end.
 5. Do not refactor or improve code outside the scope of the plan. If you notice something worth fixing, note it in your summary — don't fix it now.
-6. Leave all changes unstaged. Do not commit.
+6. If any part of the implementation involves UI components, pages, or layouts, invoke `frontend-design` instead of writing that code directly.
+7. Run `deslop` across all changed files.
+8. Run `check-compiler-errors` and fix all reported issues before handing off.
+9. Leave all changes unstaged. Do not commit.
 
 ### Subsequent Iterations
 
 1. Read the Reviewer findings and QA failures passed by the Tech Lead.
 2. Address each item explicitly. For each finding, either fix it or explain in your summary why it was not addressed.
 3. Do not introduce new behavior beyond what is needed to resolve the findings.
-4. Leave all changes unstaged. Do not commit.
+4. Run `deslop` and `check-compiler-errors` after each iteration fix before handing off.
+5. Leave all changes unstaged. Do not commit.
 
 ## Guardrails
 

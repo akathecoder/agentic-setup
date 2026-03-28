@@ -11,6 +11,7 @@ Orchestrate the full implementation loop for a given ticket or project. Maintain
 
 ## Inputs
 
+- A completed PRD (handed off by the user)
 - A Jira issue key or Notion ticket URL
 - The target branch name for the project
 
@@ -45,39 +46,44 @@ Create this file at the start and keep it up to date throughout. Structure:
 <filled in if retry limit is reached>
 ```
 
+## Skills Used
+
+- **`find-notion-doc` / `find-confluence-doc`** — resolve the ticket source. Try `find-notion-doc` first; fall back to `find-confluence-doc` if Notion is unavailable.
+- **`tdd`** — governs the test-first contract between Test Writer and Dev. Reference its principles when dispatching both agents.
+
 ## Workflow
 
-### Step 1 — Fetch Ticket
+### Step 1 — Resolve Document Source
 
-Fetch the full ticket details (title, description, acceptance criteria, linked issues) from Jira or Notion using available tools.
+Use `find-notion-doc` to locate the project page. If unavailable, fall back to `find-confluence-doc`. Use whichever succeeds to fetch the ticket.
 
 ### Step 2 — Run Planner
 
-Dispatch the Planner agent with the ticket details and codebase context. Wait for the implementation plan. Write it into `tasks/project-log.md`.
+Dispatch the Planner agent with the PRD and codebase context. Wait for the implementation plan. Write it into `tasks/project-log.md`.
 
-### Step 3 — Run Test Writer
+### Step 4 — Run Test Writer
 
-Dispatch the Test Writer with the ticket and implementation plan. Wait for tests to be written.
+Dispatch the Test Writer with the PRD and implementation plan. Reference the `tdd` skill — tests must be written against behavior, must fail before Dev runs, and must not test implementation details.
 
-### Step 4 — Implementation Loop
+### Step 5 — Implementation Loop
 
 Initialize iteration counter to 0.
 
 **Each iteration:**
 
 1. Increment counter.
-2. Dispatch Dev agent with: ticket, implementation plan, current failing tests, and Reviewer findings from the previous iteration (if any).
+2. Dispatch Dev agent with: PRD, implementation plan, current failing tests, and Reviewer findings from the previous iteration (if any). Remind Dev to follow `tdd` principles.
 3. Dispatch Reviewer agent with the current diff. Append findings to `tasks/project-log.md` under the current iteration.
 4. Dispatch QA agent. Record result in `tasks/project-log.md`.
-5. If QA passes → exit loop, proceed to Step 5.
+5. If QA passes → exit loop, proceed to Step 6.
 6. If QA fails and counter < 10 → repeat loop, passing QA failure details to Dev.
-7. If QA fails and counter == 10 → proceed to Step 6 (escalation).
+7. If QA fails and counter == 10 → proceed to Step 7 (escalation).
 
-### Step 5 — Wrap-up
+### Step 6 — Wrap-up
 
 Dispatch the Wrap-up agent with `tasks/project-log.md` and the final state of the codebase.
 
-### Step 6 — Escalation (retry limit reached)
+### Step 7 — Escalation (retry limit reached)
 
 1. Write an escalation section in `tasks/project-log.md` listing all unresolved QA failures and open Reviewer findings.
 2. Stop all agents.

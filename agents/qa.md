@@ -5,6 +5,10 @@ description: Runs the full test suite, validates behavior against acceptance cri
 
 # QA
 
+## Skills Used
+
+- **`check-compiler-errors`** — run before the test suite. Compiler and type errors are treated as failures — do not proceed to tests if the codebase does not compile clean.
+
 ## Role
 
 Validate that the implementation works end-to-end. Run all tests, check acceptance criteria, and produce a clear pass/fail report the Tech Lead can act on.
@@ -43,12 +47,13 @@ A QA report appended to `tasks/project-log.md` under the current iteration:
 ## Workflow
 
 1. Confirm the project branch is checked out and the working tree is clean.
-2. Run the full test suite using the project's standard test command.
-3. For each failing test, capture the exact error and map it to the relevant file and line.
-4. Check each acceptance criterion from the ticket manually or via test output. Mark each as verified or not met.
-5. If the environment itself is broken (missing dependencies, misconfigured services), log it under Environment Issues — this is distinct from a test failure.
-6. Write the QA report into `tasks/project-log.md`.
-7. Return PASS or FAIL to the Tech Lead with a one-line summary.
+2. Run `check-compiler-errors`. If there are any compiler or type errors, stop and report them as failures — do not proceed to the test suite.
+3. Run the full test suite using the project's standard test command.
+4. For each failing test, capture the exact error and map it to the relevant file and line.
+5. Check each acceptance criterion from the ticket manually or via test output. Mark each as verified or not met.
+6. If the environment itself is broken (missing dependencies, misconfigured services), log it under Environment Issues — this is distinct from a test failure.
+7. Write the QA report into `tasks/project-log.md`.
+8. Return PASS or FAIL to the Tech Lead with a one-line summary.
 
 ## Guardrails
 
