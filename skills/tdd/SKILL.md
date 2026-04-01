@@ -5,6 +5,8 @@ description: Test-driven development with red-green-refactor loop. Use when user
 
 # Test-Driven Development
 
+Use the AskQuestion tool for structured choices, confirmations, prioritization, and ambiguity resolution during planning. Use normal chat only when you need free-form input that cannot be expressed as fixed options.
+
 ## Philosophy
 
 **Core principle**: Tests should verify behavior through public interfaces, not implementation details. Code can change entirely; tests shouldn't.
@@ -46,16 +48,16 @@ RIGHT (vertical):
 
 Before writing any code:
 
-- [ ] Confirm with user what interface changes are needed
-- [ ] Confirm with user which behaviors to test (prioritize)
+- [ ] Use AskQuestion to confirm what interface changes are needed when the options are known
+- [ ] Use AskQuestion to prioritize which behaviors to test when the trade-offs can be expressed as choices
 - [ ] Identify opportunities for [deep modules](deep-modules.md) (small interface, deep implementation)
 - [ ] Design interfaces for [testability](interface-design.md)
 - [ ] List the behaviors to test (not implementation steps)
-- [ ] Get user approval on the plan
+- [ ] Get user approval on the plan via AskQuestion
 
-Ask: "What should the public interface look like? Which behaviors are most important to test?"
+If the public interface or behavior list is still open-ended, gather that detail in normal chat first. Once you have concrete options or a proposed plan, use AskQuestion to confirm the interface direction and prioritize the behaviors to test.
 
-**You can't test everything.** Confirm with the user exactly which behaviors matter most. Focus testing effort on critical paths and complex logic, not every possible edge case.
+**You can't test everything.** Use AskQuestion to confirm exactly which behaviors matter most once the candidate behaviors are concrete. Focus testing effort on critical paths and complex logic, not every possible edge case.
 
 ### 2. Tracer Bullet
 

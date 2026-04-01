@@ -5,6 +5,8 @@ description: Find the relevant Confluence project page for the current project i
 
 This skill is a utility used by other skills to resolve the correct Confluence project page for the current project. It can also be invoked directly by the user.
 
+Use the AskQuestion tool whenever project resolution requires a bounded choice, confirmation, or ambiguity resolution. Use normal chat only when you need free-form text that cannot be represented as fixed options.
+
 ## Memory-first lookup
 
 Before querying Confluence, check agent memory for an existing entry for this project:
@@ -19,11 +21,11 @@ Before querying Confluence, check agent memory for an existing entry for this pr
 2. **Determine the project name.**
    - Infer it from the current working directory name or git repository name.
    - If a calling skill has passed a project name hint, prefer that.
-   - If still ambiguous, ask the user: "What is the Confluence project name I should use?"
+   - If still ambiguous, request the project name in normal chat because the missing input is free-form text.
 
 3. **Get the cloud ID.**
    - Use `getAccessibleAtlassianResources` to retrieve the available Atlassian cloud instances.
-   - If multiple cloud instances exist, ask the user which one to use. If only one, use it.
+   - If multiple cloud instances exist, use AskQuestion to let the user choose which one to use. If only one, use it.
 
 4. **Find the user's personal space.**
    - Use `searchConfluenceUsingCql` with CQL like `type = "personal"` or search for the user's personal space.
@@ -33,11 +35,11 @@ Before querying Confluence, check agent memory for an existing entry for this pr
 5. **Find the Projects folder.**
    - Search the children of the personal space root for a page titled "Projects" (or a closely matching name).
    - This is the top-level folder under which all project subpages live.
-   - If no "Projects" page is found, list the top-level pages in the personal space and ask the user which page serves as the projects root.
+   - If no "Projects" page is found, list the top-level pages in the personal space and use AskQuestion to let the user choose which page serves as the projects root.
 
 6. **Find the matching project subpage.**
    - Search the children of the Projects folder for a subpage whose title matches (or closely matches) the resolved project name.
-   - If no match is found, show the user the available project names and ask them to confirm the correct one. Do not guess or pick an unrelated page.
+   - If no match is found, show the user the available project names and use AskQuestion to confirm the correct one. Do not guess or pick an unrelated page.
 
 7. **Save to memory.**
    - Once the correct project subpage is confirmed, save a reference memory entry:

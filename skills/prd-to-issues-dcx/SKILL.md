@@ -7,6 +7,8 @@ description: Break a PRD into independently-grabbable vertical slices and create
 
 Break a PRD into independently-grabbable vertical slices (tracer bullets) and create them as a Jira Epic with child tickets.
 
+Use the AskQuestion tool for structured choices, confirmations, and ambiguity resolution throughout this workflow. Use normal chat only when you need free-form feedback that cannot be expressed as fixed options.
+
 ## Process
 
 ### 1. Locate the PRD
@@ -15,7 +17,7 @@ Invoke the `find-confluence-doc` skill to resolve the Confluence project page fo
 
 Once you have the project page, search its child pages for the relevant PRD:
 - If there is only one PRD, use it.
-- If there are multiple, list them and ask the user which one to use.
+- If there are multiple, list them and use AskQuestion to let the user choose which one to use.
 - If the user already specified a PRD by name, find the closest match.
 
 Read the full content of the selected PRD page using `getConfluencePage` with `contentFormat="markdown"`.
@@ -46,7 +48,7 @@ Present the proposed breakdown as a numbered list. For each slice, show:
 - **Blocked by**: which other slices (if any) must complete first
 - **User stories covered**: which user stories from the PRD this addresses
 
-Ask the user:
+Use AskQuestion where the feedback can be represented as bounded choices, and use normal chat only for any extra free-form rationale. Cover:
 
 - Does the granularity feel right? (too coarse / too fine)
 - Are the dependency relationships correct?
@@ -57,9 +59,9 @@ Iterate until the user approves the breakdown.
 
 ### 5. Determine the Jira project
 
-Ask the user which Jira project to create tickets in. Provide the project key (e.g. PROJ, ENG).
+Request the Jira project key in normal chat if the user already knows it. If they do not, use AskQuestion with the available project list.
 
-If the user is unsure, use `getVisibleJiraProjects` to list available projects and let them pick.
+If the user is unsure, use `getVisibleJiraProjects` to list available projects and use AskQuestion to let them pick.
 
 Once you have the project key, use `getJiraProjectIssueTypesMetadata` to discover available issue types (Epic, Story, Task, Bug, etc.).
 

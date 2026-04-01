@@ -7,6 +7,8 @@ description: Break a PRD into independently-grabbable vertical slices and create
 
 Break a PRD into independently-grabbable vertical slices (tracer bullets) and create them as Kanban tasks in Notion.
 
+Use the AskQuestion tool for structured choices, confirmations, and ambiguity resolution throughout this workflow. Use normal chat only when you need free-form feedback that cannot be expressed as fixed options.
+
 ## Process
 
 ### 1. Locate the PRD
@@ -15,7 +17,7 @@ Invoke the `find-notion-doc` skill to resolve the Notion project page for the cu
 
 Once you have the project page, search its child pages for the relevant PRD:
 - If there is only one PRD, use it.
-- If there are multiple, list them and ask the user which one to use.
+- If there are multiple, list them and use AskQuestion to let the user choose which one to use.
 - If the user already specified a PRD by name, find the closest match.
 
 Read the full content of the selected PRD page.
@@ -45,7 +47,7 @@ Present the proposed breakdown as a numbered list. For each slice, show:
 - **Blocked by**: which other slices (if any) must complete first
 - **User stories covered**: which user stories from the PRD this addresses
 
-Ask the user:
+Use AskQuestion where the feedback can be represented as bounded choices, and use normal chat only for any extra free-form rationale. Cover:
 
 - Does the granularity feel right? (too coarse / too fine)
 - Are the dependency relationships correct?

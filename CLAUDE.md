@@ -37,6 +37,14 @@ The `description` field is the trigger condition — write it as "Use when…" s
 
 ## Rules
 
+### Use AskQuestion For Structured Input
+
+When authoring or updating repo-owned skills:
+
+- Use the `AskQuestion` tool for any user interaction that can be represented as a structured choice, confirmation, or disambiguation.
+- Use normal chat only when collecting free-form content that cannot be expressed as fixed options, such as long descriptions, ticket summaries, reproduction steps, or other open-ended inputs.
+- If a question can be answered by exploring the repo or calling tools, do that before asking the user.
+
 ### Keep README Updated
 
 Update `README.md` whenever a change affects the developer-facing surface: setup, run commands, architecture, APIs, tooling, or contributing workflow. Skip for internal refactors, bug fixes with no behavior change, and test-only changes.

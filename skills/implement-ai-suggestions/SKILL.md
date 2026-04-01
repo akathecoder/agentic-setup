@@ -16,7 +16,7 @@ Accept two URL formats:
 2. **Full review**: `https://github.com/{owner}/{repo}/pull/{number}#pullrequestreview-{review_id}`
    - Extract `owner`, `repo`, `number`, and `review_id` from the URL.
 
-If the URL doesn't match either pattern, ask the user for a valid link.
+If the URL doesn't match either pattern, request a valid link in normal chat. This is free-form input, so do not force it through AskQuestion.
 
 ## Workflow
 

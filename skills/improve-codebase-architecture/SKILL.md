@@ -7,6 +7,8 @@ description: Explore a codebase to find opportunities for architectural improvem
 
 Explore a codebase like an AI would, surface architectural friction, discover opportunities for improving testability, and propose module-deepening refactors as GitHub issue RFCs.
 
+Use the AskQuestion tool for structured choices, confirmations, and ambiguity resolution. Use normal chat only when you need free-form input that cannot be expressed as fixed options.
+
 A **deep module** (John Ousterhout, "A Philosophy of Software Design") has a small interface hiding a large implementation. Deep modules are more testable, more AI-navigable, and let you test at the boundary instead of inside.
 
 ## Process
@@ -32,7 +34,7 @@ Present a numbered list of deepening opportunities. For each candidate, show:
 - **Dependency category**: See [REFERENCE.md](REFERENCE.md) for the four categories
 - **Test impact**: What existing tests would be replaced by boundary tests
 
-Do NOT propose interfaces yet. Ask the user: "Which of these would you like to explore?"
+Do NOT propose interfaces yet. Use AskQuestion to ask: "Which of these would you like to explore?"
 
 ### 3. User picks a candidate
 
@@ -70,6 +72,8 @@ Present designs sequentially, then compare them in prose.
 After comparing, give your own recommendation: which design you think is strongest and why. If elements from different designs would combine well, propose a hybrid. Be opinionated — the user wants a strong read, not just a menu.
 
 ### 6. User picks an interface (or accepts recommendation)
+
+Use AskQuestion so the user can choose an interface or explicitly accept your recommendation.
 
 ### 7. Create GitHub issue
 

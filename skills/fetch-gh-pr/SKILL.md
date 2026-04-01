@@ -14,7 +14,7 @@ Accept two input forms:
 1. **Full URL**: `https://github.com/owner/repo/pull/123` — extract owner, repo, and number from the URL.
 2. **Bare number**: `#123` or `123` — use `gh pr view <number>` which infers the repo from the current directory's git remote.
 
-If a bare number is given and the current directory has no git remote, ask the user for the full URL.
+If a bare number is given and the current directory has no git remote, request the full URL in normal chat. This is free-form input, so do not force it through AskQuestion.
 
 ## Fetch Workflow
 

@@ -5,6 +5,8 @@ description: Find the relevant Notion project page for the current project. Desi
 
 This skill is a utility used by other skills to resolve the correct Notion project page for the current project. It can also be invoked directly by the user.
 
+Use the AskQuestion tool whenever project resolution requires a bounded choice, confirmation, or ambiguity resolution. Use normal chat only when you need free-form text that cannot be represented as fixed options.
+
 ## Memory-first lookup
 
 Before querying Notion, check agent memory for an existing entry for this project:
@@ -19,7 +21,7 @@ Before querying Notion, check agent memory for an existing entry for this projec
 2. **Determine the project name.**
    - Infer it from the current working directory name or git repository name.
    - If a calling skill has passed a project name hint, prefer that.
-   - If still ambiguous, ask the user: "What is the Notion project name I should use?"
+   - If still ambiguous, request the project name in normal chat because the missing input is free-form text.
 
 3. **Find the root Projects page.**
    - Use Notion MCP to locate the top-level "Projects" page — the root page under which all projects live as subpages.
@@ -27,7 +29,7 @@ Before querying Notion, check agent memory for an existing entry for this projec
 
 4. **Find the matching project subpage.**
    - Search the children of the root Projects page for a subpage whose title matches (or closely matches) the resolved project name.
-   - If no match is found, show the user the available project names and ask them to confirm the correct one. Do not guess or pick an unrelated page.
+   - If no match is found, show the user the available project names and use AskQuestion to confirm the correct one. Do not guess or pick an unrelated page.
 
 5. **Save to memory.**
    - Once the correct project subpage is confirmed, save a reference memory entry:

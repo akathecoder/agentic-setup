@@ -36,6 +36,8 @@ cp rules/<name>.md .cursor/rules/
 
 Skills are invoked by Claude Code using `/skill-name` or triggered internalmatically based on context.
 
+Interactive repo skills should use `AskQuestion` for structured choices, confirmations, and ambiguity resolution. Use normal chat only for free-form input that cannot be represented as fixed options.
+
 | Skill                           | Type     | Description                                                                                                                                                                                                          |
 | ------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `write-a-prd`                   | generic  | Create a PRD through user interview, codebase exploration, and module design. Publishes to Notion; falls back to a local markdown file if Notion MCP is unavailable.                                                 |

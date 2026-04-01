@@ -5,17 +5,19 @@ description: Create a PRD through user interview, codebase exploration, and modu
 
 This skill will be invoked when the user wants to create a PRD. You may skip steps if you don't consider them necessary.
 
-1. Ask the user for a long, detailed description of the problem they want to solve and any potential ideas for solutions.
+Use the AskQuestion tool for structured choices, confirmations, and ambiguity resolution during the PRD interview. Use normal chat only for free-form inputs like the initial problem description, solution ideas, and other open-ended details.
+
+1. Request a long, detailed description of the problem the user wants to solve and any potential ideas for solutions in normal chat.
 
 2. Explore the repo to verify their assertions and understand the current state of the codebase.
 
-3. Interview the user relentlessly about every aspect of this plan until you reach a shared understanding. Walk down each branch of the design tree, resolving dependencies between decisions one-by-one.
+3. Interview the user relentlessly about every aspect of this plan until you reach a shared understanding. Walk down each branch of the design tree, resolving dependencies between decisions one-by-one. Use AskQuestion whenever the next step is a bounded choice, confirmation, or disambiguation.
 
 4. Sketch out the major modules you will need to build or modify to complete the implementation. Actively look for opportunities to extract deep modules that can be tested in isolation.
 
 A deep module (as opposed to a shallow module) is one which encapsulates a lot of functionality in a simple, testable interface which rarely changes.
 
-Check with the user that these modules match their expectations. Check with the user which modules they want tests written for.
+Use AskQuestion to confirm that these modules match the user's expectations and to choose which modules should get dedicated tests when the options are known.
 
 5. Once you have a complete understanding of the problem and solution, use the template below to write the PRD.
 
