@@ -4,11 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repo Structure
 
-This repo is a collection of Claude Code **skills** and **rules** — no build system, no tests, no compiled output.
+This repo is a collection of Claude Code **skills**, **rules**, and archived agent definitions — no build system, no tests, no compiled output.
 
 - `skills/<name>/SKILL.md` — the skill definition. Must include YAML frontmatter with `name` and `description`.
-- `skills/<name>/*.md` — optional supporting reference files a skill can read (e.g., `tdd/` has `mocking.md`, `tests.md`, etc.).
-- `agents/<name>.md` — autonomous agents that orchestrate multi-step work. `tech-lead` is the entry point; it dispatches all others.
+- `skills/<name>/*.md` — optional supporting reference files a skill can read, if present.
+- `agents/<name>.md` — active autonomous agents, if any are present.
+- `deprecated/skills/<name>/...` — archived skills kept for reference. Do not document or install them as active skills.
+- `deprecated/agents/<name>.md` — archived autonomous agents kept for reference. Do not document or install them as active agents.
 - `rules/<name>.md` — global rules loaded into every Claude Code session.
 - `CLAUDE.md` — this file, loaded into every session in this repo.
 - `README.md` — user-facing documentation. Keep it up to date (see rule below).
@@ -31,7 +33,7 @@ The `description` field is the trigger condition — write it as "Use when…" s
 | Type | Meaning |
 |---|---|
 | `generic` | General-purpose, invoked manually by the user via `/skill-name` |
-| `work` | Project-specific variants (currently DCX — uses Confluence + Jira instead of Notion) |
+| `work` | Project-specific variants, such as archived DCX skills that use Confluence + Jira instead of Notion |
 | `internal` | Invoked automatically by the agent or by other skills, not by the user directly |
 | `niche` | Invoked manually but only for a very specific, narrow purpose |
 
@@ -52,3 +54,4 @@ Update `README.md` whenever a change affects the developer-facing surface: setup
 - Read the current README before editing — surgical updates only, no wholesale rewrites.
 - Document commands over concepts; use fenced code blocks for anything copy-pasteable.
 - Remove stale content rather than leaving it.
+- Keep active and deprecated definitions separate: active tables should reflect `skills/`, `agents/`, and `rules/`; deprecated definitions belong only in a clearly marked deprecated/archive section.

@@ -1,6 +1,6 @@
 # Agentic Setup
 
-This repository contains all the skills, rules, and agents for my personal vibe coding setup.
+This repository contains the active skills, rules, and archived agent definitions for my personal vibe coding setup.
 
 ## Installation
 
@@ -12,7 +12,9 @@ npx skills@latest add https://github.com/akathecoder/agentic-setup
 
 ### Agents
 
-Agents are installed at the user level. Copy any agent files from `agents/` into `~/.cursor/agents/`:
+There are currently no active agents to install. Deprecated agent definitions are archived under `deprecated/agents/` for reference.
+
+When active agents are added back, install them at the user level by copying files from `agents/` into `~/.cursor/agents/`:
 
 ```bash
 cp agents/<name>.md ~/.cursor/agents/
@@ -34,44 +36,28 @@ cp rules/<name>.md .cursor/rules/
 
 ## Skills
 
-Skills are invoked by Claude Code using `/skill-name` or triggered internalmatically based on context.
+Skills are invoked by Claude Code using `/skill-name` or triggered internally based on context.
 
 Interactive repo skills should use `AskQuestion` for structured choices, confirmations, and ambiguity resolution. Use normal chat only for free-form input that cannot be represented as fixed options.
 
-| Skill                           | Type     | Description                                                                                                                                                                                                          |
-| ------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `write-a-prd`                   | generic  | Create a PRD through user interview, codebase exploration, and module design. Publishes to Notion; falls back to a local markdown file if Notion MCP is unavailable.                                                 |
-| `prd-to-issues`                 | generic  | Break a PRD into independently-grabbable vertical slices and create them as Kanban tasks in a Notion board. Classifies each task as AFK or HITL and maps dependencies.                                               |
-| `review-pr`                     | generic  | Thoroughly review a GitHub PR for correctness, security, design, testing, performance, and readability. Produces a structured review with severity-tiered findings. Does not post to GitHub unless explicitly asked. |
-| `implement-ai-suggestions`      | generic  | Fetch suggestions from a GitHub Copilot review and apply the good ones locally. Triages structured code suggestions and prose feedback; leaves changes unstaged.                                                     |
-| `improve-codebase-architecture` | generic  | Surface architectural friction in a codebase and propose module-deepening refactors. Spawns parallel sub-agents to design alternative interfaces and creates a refactor RFC as a GitHub issue.                       |
-| `tdd`                           | generic  | Test-driven development with the red-green-refactor loop. Focuses on vertical slices, behavior-driven integration tests, and clean interface design.                                                                 |
-| `frontend-design`               | generic  | Create distinctive, production-grade frontend interfaces for web components, landing pages, dashboards, or React components.                                                                                         |
-| `create-jira-ticket`            | generic  | Create a single Jira ticket through Atlassian MCP. Interviews for missing fields, validates required Jira metadata, previews the final description, and creates issue links when requested.                        |
-| `grill-me`                      | generic  | Interview the user relentlessly about a plan or design until reaching shared understanding. Resolves every branch of the decision tree before stopping.                                                              |
-| `deslop`                        | internal | Remove AI-generated slop from a branch — unnecessary comments, defensive try/catch blocks, `any` casts, and deeply-nested code. Keeps behavior unchanged.                                                            |
-| `what-did-i-get-done`           | generic  | Summarize authored commits over a time range into a concise Slack-ready status update. Excludes merge commits and cosmetic-only changes.                                                                             |
-| `check-compiler-errors`         | internal | Run compile and type-check commands, summarize failures by file and category, fix the highest-confidence issues, and re-run until clean or blocked.                                                                  |
-| `wrap-up`                       | generic  | Generate an end-of-session handoff summary: what was accomplished, hacks taken, incomplete todos, and recommended next steps. Chat-only — no file or git mutations.                                                  |
-| `write-a-prd-dcx`               | work     | Variant of `write-a-prd` for DCX projects. Publishes the finished PRD to Confluence instead of Notion.                                                                                                               |
-| `prd-to-issues-dcx`             | work     | Variant of `prd-to-issues` for DCX projects. Reads PRDs from Confluence and creates a Jira Epic with child issues instead of a Notion board.                                                                         |
-| `fetch-gh-pr`                   | internal | Fetch comprehensive GitHub PR data (metadata, diff, CI checks, inline comments) as structured markdown. Used internally by `review-pr` and `implement-ai-suggestions`.                                               |
-| `find-notion-doc`               | internal | Resolve the correct Notion project page for the current project. Checks agent memory first, then navigates Notion to find the matching subpage. Used internally by other skills.                                     |
-| `find-confluence-doc`           | internal | Resolve the correct Confluence page for the current project. Returns the page ID, space key, and URL. Used internally by other skills.                                                                               |
+| Skill                      | Type     | Description                                                                                                                                                                                                                          |
+| -------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `frontend-design`          | generic  | Create distinctive, production-grade frontend interfaces for web components, landing pages, dashboards, React components, HTML/CSS layouts, or other web UI work.                                                                     |
+| `implement-ai-suggestions` | generic  | Fetch suggestions from a GitHub Copilot review or comment and apply the good ones locally. Triages structured code suggestions and prose feedback; leaves changes unstaged.                                                          |
+| `deslop`                   | internal | Remove AI-generated code slop from a branch, including unnecessary comments, abnormal defensive checks, `any` casts, and over-nested code. Keeps behavior unchanged unless fixing a clear bug.                                      |
+| `check-compiler-errors`    | internal | Run compile and type-check commands, summarize failures by file and category, fix the highest-confidence issues, and re-run until clean or blocked.                                                                                  |
 
 ## Agents
 
-Agents in `agents/` are autonomous, long-running units that orchestrate multi-step work. The Tech Lead is the entry point — it dispatches all others.
+There are no active agents in this repo right now. The previous autonomous agent suite is deprecated and archived under `deprecated/agents/`.
 
-| Agent         | Description                                                                                                                                                                 |
-| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `tech-lead`   | Orchestrator. Fetches a Jira/Notion ticket, drives the full implementation loop, maintains `tasks/project-log.md`, and escalates to the user after 10 failed QA iterations. |
-| `planner`     | Breaks a ticket into a file-level implementation plan. Runs once before any code is written.                                                                                |
-| `test-writer` | Writes tests against the ticket spec before Dev implements. Tests must fail initially.                                                                                      |
-| `dev`         | Implements code to make tests pass. On subsequent iterations, addresses Reviewer findings and QA failures.                                                                  |
-| `reviewer`    | Reviews the current diff as a staff engineer. Posts findings to `tasks/project-log.md` by severity.                                                                         |
-| `qa`          | Runs the full test suite, validates acceptance criteria, and reports PASS/FAIL to the Tech Lead.                                                                            |
-| `wrap-up`     | Runs after QA passes. Produces `tasks/handoff.md` covering everything implemented, tested, fixed, broken, and flagged — including security and compliance concerns.         |
+Deprecated agents: `tech-lead`, `planner`, `test-writer`, `dev`, `reviewer`, `qa`, and `wrap-up`.
+
+## Deprecated
+
+Deprecated definitions are kept under `deprecated/` for historical reference and should not be installed as active skills or agents.
+
+Deprecated skills: `write-a-prd`, `write-a-prd-dcx`, `prd-to-issues`, `prd-to-issues-dcx`, `review-pr`, `fetch-gh-pr`, `find-notion-doc`, `find-confluence-doc`, `tdd`, `improve-codebase-architecture`, `create-jira-ticket`, `grill-me`, `what-did-i-get-done`, and `wrap-up`.
 
 ## Rules
 
