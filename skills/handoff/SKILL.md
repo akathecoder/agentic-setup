@@ -4,7 +4,7 @@ description: Use when the user wants to compact the current conversation into a 
 argument-hint: "What will the next session be used for?"
 ---
 
-Write a handoff document summarising the current conversation so a fresh agent can continue the work. Save it to a path produced by `mktemp -t handoff-XXXXXX.md` (read the file before you write to it).
+Write a handoff document summarising the current conversation so a fresh agent can continue the work. Save it to a path produced by a context-driven `mktemp` prefix: first derive a short lowercase hyphenated slug from the user's focus or current task, then run `mktemp -t "handoff-${slug}.md"` (read the file before you write to it). Do not use a literal placeholder like `handoff-XXXXXX.md` as the human-readable part of the filename.
 
 Suggest the skills to be used, if any, by the next session.
 
