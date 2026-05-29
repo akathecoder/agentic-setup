@@ -25,11 +25,13 @@ cp agents/<name>.md ~/.cursor/agents/
 Rules can be installed at the user level or project level depending on your use case.
 
 **User level** — applies across all projects:
+
 ```bash
 cp rules/<name>.md ~/.cursor/rules/
 ```
 
 **Project level** — applies only to the current project:
+
 ```bash
 cp rules/<name>.md .cursor/rules/
 ```
@@ -40,18 +42,19 @@ Skills are invoked by Claude Code using `/skill-name` or triggered internally ba
 
 Interactive repo skills should use `AskQuestion` for structured choices, confirmations, and ambiguity resolution. Use normal chat only for free-form input that cannot be represented as fixed options.
 
-| Skill                               | Type     | Description                                                                                                                                                                                                                          |
-| ----------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `frontend-design`                   | generic  | Create distinctive, production-grade frontend interfaces for web components, landing pages, dashboards, React components, HTML/CSS layouts, or other web UI work.                                                                     |
-| `implement-ai-suggestions`          | generic  | Fetch suggestions from a GitHub Copilot review or comment and apply the good ones locally. Triages structured code suggestions and prose feedback; leaves changes unstaged.                                                          |
-| `deslop`                            | internal | Remove AI-generated code slop from a branch, including unnecessary comments, abnormal defensive checks, `any` casts, and over-nested code. Keeps behavior unchanged unless fixing a clear bug.                                      |
-| `check-compiler-errors`             | internal | Run compile and type-check commands, summarize failures by file and category, fix the highest-confidence issues, and re-run until clean or blocked.                                                                                  |
-| `grill-with-docs`                   | generic  | Challenge a plan against the existing domain model, sharpen terminology, and update documentation such as `CONTEXT.md` and ADRs as decisions crystallize.                                                                            |
-| `improve-codebase-architecture`     | generic  | Find deepening opportunities in a codebase, informed by domain language in `CONTEXT.md` and decisions in `docs/adr/`.                                                                                                               |
-| `prototype`                         | generic  | Build throwaway logic or UI prototypes to flesh out a design, sanity-check a model, or explore radically different interface options before committing.                                                                               |
-| `tdd`                               | generic  | Build features or fix bugs with a test-driven red-green-refactor loop, behavior-focused tests, and public-interface-first design.                                                                                                     |
-| `zoom-out`                          | generic  | Ask for broader module and caller context when working in an unfamiliar area of code or needing to understand how it fits into the bigger picture.                                                                                    |
-| `handoff`                           | generic  | Compact the current conversation into a handoff document for another agent or session to pick up.                                                                                                                                    |
+| Skill                           | Type     | Description                                                                                                                                                                                    |
+| ------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `frontend-design`               | generic  | Create distinctive, production-grade frontend interfaces for web components, landing pages, dashboards, React components, HTML/CSS layouts, or other web UI work.                              |
+| `implement-ai-suggestions`      | generic  | Fetch suggestions from a GitHub Copilot review or comment and apply the good ones locally. Triages structured code suggestions and prose feedback; leaves changes unstaged.                    |
+| `deslop`                        | internal | Remove AI-generated code slop from a branch, including unnecessary comments, abnormal defensive checks, `any` casts, and over-nested code. Keeps behavior unchanged unless fixing a clear bug. |
+| `check-compiler-errors`         | internal | Run compile and type-check commands, summarize failures by file and category, fix the highest-confidence issues, and re-run until clean or blocked.                                            |
+| `grill-with-docs`               | generic  | Challenge a plan against the existing domain model, sharpen terminology, and update documentation such as `CONTEXT.md` and ADRs as decisions crystallize.                                      |
+| `improve-codebase-architecture` | generic  | Find deepening opportunities in a codebase, informed by domain language in `CONTEXT.md` and decisions in `docs/adr/`.                                                                          |
+| `prototype`                     | generic  | Build throwaway logic or UI prototypes to flesh out a design, sanity-check a model, or explore radically different interface options before committing.                                        |
+| `tdd`                           | generic  | Build features or fix bugs with a test-driven red-green-refactor loop, behavior-focused tests, and public-interface-first design.                                                              |
+| `write-rca`                     | generic  | Interview for incident details, draft a detailed RCA from the local RCA template, and publish the approved final RCA to a single Confluence page.                                              |
+| `zoom-out`                      | generic  | Ask for broader module and caller context when working in an unfamiliar area of code or needing to understand how it fits into the bigger picture.                                             |
+| `handoff`                       | generic  | Compact the current conversation into a handoff document for another agent or session to pick up.                                                                                              |
 
 ## Agents
 
