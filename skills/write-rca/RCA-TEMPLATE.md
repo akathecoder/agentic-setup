@@ -2,6 +2,14 @@
 
 Source template: https://coindcx.atlassian.net/wiki/spaces/OnRampOffR/pages/4150427667/RCA+Template+2025
 
+## Linking Atlassian References
+
+Whenever a Jira ticket, Confluence page, or other Atlassian item is mentioned by short form or link, make it a clickable link, not plain text. This applies everywhere: prose, tables, timeline entries, and the Jira Ref columns.
+
+- Jira issue key: write `[CRT-1000](https://coindcx.atlassian.net/browse/CRT-1000)` instead of `CRT-1000`.
+- Confluence page: write `[Incident Runbook](https://coindcx.atlassian.net/wiki/spaces/.../pages/123456789/Incident+Runbook)` instead of `Incident Runbook`.
+- If the user provides a full link, use that URL as the target and keep the short form or page title as the visible text.
+
 ## Ownership
 
 | **Created By** | **Reviewed By** | **Approved By** |
@@ -100,17 +108,19 @@ Answer with concrete rollback, feature flag, automation, operational tooling, ac
 
 | **Corrective Action** | **Responsible Person** | **ETA** | **Jira Ref** |
 | --------------------- | ---------------------- | ------- | ------------ |
+| Example: Add index to slow query | Jane Doe | 2025-06-01 | [CRT-1000](https://coindcx.atlassian.net/browse/CRT-1000) |
 |                       |                        |         |              |
 
-Corrective actions should address the immediate failure mode and be achievable in the short term.
+Corrective actions should address the immediate failure mode and be achievable in the short term. In the Jira Ref column, link the issue key, for example `[CRT-1000](https://coindcx.atlassian.net/browse/CRT-1000)`, never plain text.
 
 ## Preventive Action (Long Term Solutions)
 
 | **Preventive Action** | **Responsible Person** | **ETA** | **Jira Ref** |
 | --------------------- | ---------------------- | ------- | ------------ |
+| Example: Add query review gate to deploy workflow | John Roe | 2025-07-15 | [CRT-1042](https://coindcx.atlassian.net/browse/CRT-1042) |
 |                       |                        |         |              |
 
-Preventive actions should address systemic root causes and reduce recurrence risk.
+Preventive actions should address systemic root causes and reduce recurrence risk. Link every Jira reference, for example `[CRT-1042](https://coindcx.atlassian.net/browse/CRT-1042)`.
 
 ## Lessons Learned
 
