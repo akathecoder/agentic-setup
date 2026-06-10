@@ -44,14 +44,15 @@ Interactive repo skills should use `AskQuestion` for structured choices, confirm
 
 | Skill                           | Type     | Description                                                                                                                                                                                    |
 | ------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `plan`                          | generic  | Clarify, stress-test, and approve a feature or change before implementation, creating a work packet under `docs/<jira-ticket-or-context>/`.                                                    |
+| `build`                         | generic  | Implement an approved plan or small code change with verification, using TDD by default for meaningful behavior changes and subagents for bounded work.                                        |
+| `review`                        | generic  | Independently review a local branch diff or GitHub PR from a fresh readonly context, reporting findings without fixing them.                                                                   |
+| `apply-feedback`                | generic  | Triage review feedback from humans, Bugbot, Copilot, AI reviewers, GitHub comments, pasted findings, or Review output; ask what to fix; then apply selected items.                             |
 | `frontend-design`               | generic  | Create distinctive, production-grade frontend interfaces for web components, landing pages, dashboards, React components, HTML/CSS layouts, or other web UI work.                              |
-| `implement-ai-suggestions`      | generic  | Fetch suggestions from a GitHub Copilot review or comment and apply the good ones locally. Triages structured code suggestions and prose feedback; leaves changes unstaged.                    |
 | `deslop`                        | internal | Remove AI-generated code slop from a branch, including unnecessary comments, abnormal defensive checks, `any` casts, and over-nested code. Keeps behavior unchanged unless fixing a clear bug. |
 | `check-compiler-errors`         | internal | Run compile and type-check commands, summarize failures by file and category, fix the highest-confidence issues, and re-run until clean or blocked.                                            |
-| `grill-with-docs`               | generic  | Challenge a plan against the existing domain model, sharpen terminology, and update documentation such as `CONTEXT.md` and ADRs as decisions crystallize.                                      |
-| `improve-codebase-architecture` | generic  | Find deepening opportunities in a codebase, informed by domain language in `CONTEXT.md` and decisions in `docs/adr/`.                                                                          |
+| `improve-codebase-architecture` | generic  | Find deepening opportunities in a codebase, informed by work-packet glossary language and ADRs.                                                                                               |
 | `prototype`                     | generic  | Build throwaway logic or UI prototypes to flesh out a design, sanity-check a model, or explore radically different interface options before committing.                                        |
-| `tdd`                           | generic  | Build features or fix bugs with a test-driven red-green-refactor loop, behavior-focused tests, and public-interface-first design.                                                              |
 | `write-rca`                     | generic  | Interview for incident details, draft a detailed RCA from the local RCA template, and publish the approved final RCA to a single Confluence page.                                              |
 | `zoom-out`                      | generic  | Ask for broader module and caller context when working in an unfamiliar area of code or needing to understand how it fits into the bigger picture.                                             |
 | `handoff`                       | generic  | Compact the current conversation into a handoff document for another agent or session to pick up.                                                                                              |
@@ -66,7 +67,7 @@ Deprecated agents: `tech-lead`, `planner`, `test-writer`, `dev`, `reviewer`, `qa
 
 Deprecated definitions are kept under `deprecated/` for historical reference and should not be installed as active skills or agents.
 
-Deprecated skills: `write-a-prd`, `write-a-prd-dcx`, `prd-to-issues`, `prd-to-issues-dcx`, `review-pr`, `fetch-gh-pr`, `find-notion-doc`, `find-confluence-doc`, `tdd`, `improve-codebase-architecture`, `create-jira-ticket`, `grill-me`, `what-did-i-get-done`, and `wrap-up`.
+Deprecated skills: `write-a-prd`, `write-a-prd-dcx`, `prd-to-issues`, `prd-to-issues-dcx`, `review-pr`, `fetch-gh-pr`, `find-notion-doc`, `find-confluence-doc`, `tdd`, `implement-ai-suggestions`, `grill-with-docs`, `create-jira-ticket`, `grill-me`, `what-did-i-get-done`, and `wrap-up`.
 
 ## Rules
 

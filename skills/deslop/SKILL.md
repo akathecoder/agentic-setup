@@ -1,6 +1,6 @@
 ---
 name: deslop
-description: Remove AI-generated code slop and clean up code style
+description: Remove AI-generated code slop and clean up code style. Use when cleaning up unnecessary comments, abnormal defensive checks, loose casts, over-nested code, or other AI-looking artifacts after implementation.
 ---
 
 # Remove AI code slop
