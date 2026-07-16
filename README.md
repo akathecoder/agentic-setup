@@ -52,6 +52,7 @@ Interactive repo skills should use `AskQuestion` for structured choices, confirm
 | `frontend-design`               | generic  | Create distinctive, production-grade frontend interfaces for web components, landing pages, dashboards, React components, HTML/CSS layouts, or other web UI work.                              |
 | `deslop`                        | internal | Remove AI-generated code slop from a branch, including unnecessary comments, abnormal defensive checks, `any` casts, and over-nested code. Keeps behavior unchanged unless fixing a clear bug. |
 | `check-compiler-errors`         | internal | Run compile and type-check commands, summarize failures by file and category, fix the highest-confidence issues, and re-run until clean or blocked.                                            |
+| `codegraph`                     | internal | Prefer CodeGraph MCP queries for repository discovery, code-flow questions, and impact analysis whenever the server and project index are available.                                           |
 | `publish-confluence`            | internal | Publish local documentation files to Atlassian Confluence through a bounded Composer 2.5 subagent using Atlassian MCP, with preview-before-write approval.                                     |
 | `improve-codebase-architecture` | generic  | Find deepening opportunities in a codebase, informed by work-packet glossary language and ADRs.                                                                                                |
 | `prototype`                     | generic  | Build throwaway logic or UI prototypes to flesh out a design, sanity-check a model, or explore radically different interface options before committing.                                        |
@@ -78,5 +79,6 @@ Rules in `rules/` are loaded globally and govern agent behavior across all sessi
 
 | Rule                          | Description                                                                                                                                                                             |
 | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `codegraph`                   | Always prefer `codegraph_explore` for repository discovery when the CodeGraph MCP server and project index are available; use built-in tools only as the fallback.                      |
 | `sync-task-status-to-tickets` | Whenever a task status changes (started, completed, blocked, deferred), update the linked Notion or Jira ticket immediately and leave a brief comment summarizing progress.             |
 | `top-level-generic-rule`      | Base CLAUDE.md template to drop into any coding project. Covers planning, subagent strategy, task management, verification, bug fixing, and code quality. Refine per-project as needed. |

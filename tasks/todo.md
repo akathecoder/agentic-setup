@@ -1,26 +1,30 @@
-# Write Jira Skill Todo
+# Prioritize CodeGraph Todo
 
 ## Plan
 
-- [x] Clarify base Jira ticket and approval guardrails.
-- [x] Define feature ticket and CMR ticket modes.
-- [x] Decide that non-applicable CMR sections are omitted from final tickets.
+- [x] Define a CodeGraph-first discovery workflow and fallbacks.
+- [x] Keep installation, indexing, and MCP configuration outside the skill's scope.
 
 ## Build
 
-- [x] Add `write-jira` skill entrypoint.
-- [x] Add feature ticket guidance.
-- [x] Add CMR ticket guidance.
-- [x] Add approval preview guidance.
-- [x] Update README skill table.
+- [x] Add the internal `codegraph` skill entrypoint.
+- [x] Document direct `codegraph_explore` usage, stale-file handling, and fallback behavior.
+- [x] Add the active skill to the README inventory.
+- [x] Make the `codegraph` skill eligible for automatic invocation.
+- [x] Add an always-applied `codegraph` rule and document it in the README.
 
 ## Verification
 
-- [x] Check skill frontmatter and references.
-- [x] Review final files for consistency with approval rules.
+- [x] Validate the skill frontmatter and referenced paths.
+- [x] Run Markdown whitespace validation.
+- [x] Validate the new always-applied rule and final Markdown changes.
 
 ## Review
 
-- [x] Summarize changes and any follow-up decisions.
+- [x] Summarize automatic skill invocation and rule enforcement.
 
-Added active `write-jira` skill with supporting guidance for feature tickets, CMR tickets, and mandatory approval previews. Verified the skill references resolve, README lists the new active skill, and `git diff --check` passes.
+The `codegraph` skill remains automatically discoverable because its frontmatter
+does not set `disable-model-invocation`. The new always-applied `codegraph` rule
+enforces direct `codegraph_explore` usage whenever the MCP server and project
+index are available, with an explicit no-index fallback. Verified all Markdown
+changes with `git diff --check`.

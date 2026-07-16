@@ -1,0 +1,20 @@
+---
+description: Prefer CodeGraph MCP for indexed repository discovery
+alwaysApply: true
+---
+
+# CodeGraph Repository Discovery
+
+When repository understanding is needed, prefer `codegraph_explore` over broad
+file-by-file exploration when the CodeGraph MCP server and project index are
+available.
+
+1. Inspect the available CodeGraph MCP tool schema before invoking it.
+2. Query `codegraph_explore` directly with a focused request and the relevant
+   `projectPath`.
+3. Use its returned source, call paths, and impact data as the primary context.
+   Do not repeat the same discovery with broad search or read loops.
+4. If it reports stale files, read only the named files for live content.
+5. Fall back to built-in exploration if CodeGraph is unavailable or the project
+   has no index. Do not install, initialize, or re-index CodeGraph unless the
+   user explicitly asks.
