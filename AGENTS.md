@@ -12,21 +12,39 @@ Skills follow the [Agent Skills spec](https://agentskills.io/specification): a
 directory containing `SKILL.md` with YAML frontmatter. One `SKILL.md` serves every
 harness, with no per-harness sidecars (`agents/openai.yaml`, `.claude/` variants).
 
+**Plugins follow [Agent Plugins](https://agent-plugins.org/specification) 1.0.0.** A
+plugin definition composes canonical skills (and optional MCP) without duplicating their
+authorship. Build it into a self-contained distributable plugin: every packaged path,
+including symlinks, resolves within that plugin root. Client-only behaviour lives under
+reverse-domain namespaces (`extensions` and/or a top-level directory of that name), never
+as portable top-level fields. MCP, when needed, is root `mcp.json` at the same schema
+version as `plugin.json`.
+
 **Cursor is the first-class harness.** Where a portable choice and a Cursor-specific
 one conflict, take the portable one and note the Cursor behaviour beside it.
 
 ## Layout
 
 ```
-skills/<skill-name>/SKILL.md   # one directory per skill, flat
-rules/<rule-name>.mdc          # Cursor rules; see rules/AGENTS.md to write one
+skills/<skill-name>/SKILL.md   # canonical skill source; one directory per skill, flat
+rules/<rule-name>.mdc          # canonical rules; see rules/AGENTS.md to write one
+plugins/<plugin-name>/
+  plugin.json                  # source manifest; $schema + name at minimum
+  skills/<skill-name> -> …     # source selection symlink into skills/<skill-name>
+  mcp.json                     # only when the plugin ships MCP
+  <reverse-domain>/            # client extension sources, including client rules
+dist/plugins/<plugin-name>/    # generated self-contained installable plugin
 CONTEXT.md                     # leading-word glossary; read before naming a concept
 ```
 
-Skills install by symlink into `~/.agents/skills/<name>`, rules into `~/.cursor/rules/`,
-so a `git pull` updates everything installed. `~/.agents/skills/` is harness-neutral and
-Cursor reads it, which is why it is the install root rather than `~/.cursor/skills/`.
-The link script is not written yet; until it is, linking is manual.
+Author skills and rules in their canonical trees. A plugin definition selects them by
+symlink — never copy. The build copies selected content into `dist/plugins/`; do not
+install a source definition. Plugin `name` matches its directory and the Agent Plugins
+name constraints. Split plugins when install or enablement should be independent.
+
+Skills still install by symlink into `~/.agents/skills/<name>`, rules into
+`~/.cursor/rules/`, and plugins into the client's plugin root (prefer a harness-neutral
+path under `~/.agents/` when allowed). The link script is not written yet; link manually.
 
 ## Where agent-authored files go
 
@@ -128,9 +146,8 @@ than a positional variable.
 ## Descriptions
 
 A description is a **context pointer**: it names material outside the agent's context
-and encodes the condition for reaching it. The wording, not the target, decides whether
-the agent gets there — so a skill that should have fired and didn't is a bug in the
-description. Sharpen the wording before touching the body.
+and encodes the condition for reaching it. The wording decides whether the agent gets
+there — a miss is a bug in the description. Sharpen wording before touching the body.
 
 A model-facing description names the skill's job, then lists the triggers:
 
@@ -140,18 +157,13 @@ description:
   user says "debug this", or reports something throwing, failing, or slow.
 ```
 
-The trigger clause is always loaded, so it earns harder pruning than the body:
+The trigger clause is always loaded, so prune it harder than the body:
 
-- **Front-load the words that do the triggering.** Hold the opening job clause to a few
-  words; it earns its place because the agent matches semantically against it, but it
-  competes with the triggers for the strongest position.
-- **One trigger per branch.** Synonyms renaming a single case are that case written
-  twice; keep only genuinely distinct cases.
-- **Name the job, not the contents.** The description says when to load the skill; what
-  it contains is the body's work.
+- **Front-load the words that do the triggering.** Hold the job clause to a few words.
+- **One trigger per branch.** Keep only genuinely distinct cases, not synonym renames.
+- **Name the job, not the contents.** When to load is the description; what is the body.
 
-A user-invoked skill's description is instead one line stating what the skill does,
-read by a human browsing a list.
+A user-invoked skill's description is one line stating what it does, for a human list.
 
 ## Information hierarchy
 
@@ -163,22 +175,18 @@ Content sits on one of three rungs, ranked by how immediately the agent needs it
 3. **Disclosed reference** — a sibling file reached by a pointer, loaded only when the
    pointer fires.
 
-**Progressive disclosure** is the move down that ladder, and the test is **branching**:
+**Progressive disclosure** is the move down that ladder; the test is **branching**:
 inline what every run needs, disclose what only some runs reach. A skill forking between
-two modes gives each mode its own file, so a given run loads one. The same test governs
-templates.
+two modes gives each mode its own file. The same test governs templates.
 
-Sibling files are `UPPERCASE-KEBAB.md`, one level deep from `SKILL.md`, and always
-pointed at with the condition for reading them: `When the document is a skill, read
-SKILL-MECHANICS.md for invocation choice.` A pointer naming a target without its
-condition leaves the agent unable to tell when to follow it.
+Sibling files are `UPPERCASE-KEBAB.md`, one level deep from `SKILL.md`, always pointed
+at with the condition for reading them: `When the document is a skill, read
+SKILL-MECHANICS.md for invocation choice.` A pointer without its condition cannot fire.
 
-The spec suggests nesting reference material under `references/`; flat siblings win here
-because a one-word filename is easier to point at and keep one level deep. Executable
-helpers still go in `scripts/` and static templates in `assets/`.
+Flat siblings win over nesting under `references/` — one-word filenames stay one level
+deep. Executables still go in `scripts/`, static templates in `assets/`.
 
-**Co-locate** within a file: keep a concept's definition, rules, and caveats under one
-heading rather than scattered.
+**Co-locate** within a file: definition, rules, and caveats under one heading.
 
 ## Steps and completion criteria
 
@@ -196,16 +204,11 @@ explicit `Done when` list.
 
 ## Leading words
 
-A **leading word** is a compact concept the model already holds from pretraining that
-the agent thinks with while running the skill — `seam`, `tight` loop, `red`, `tracer
-bullet`, `blast radius`. Repeat it as a token; it accumulates meaning across uses and
-anchors a region of behaviour in very few tokens. It pays off twice, steering behaviour
-in the body and improving triggering in the description, since the word already lives in
-how I phrase my prompts.
-
-Prefer a word already carrying the meaning in ordinary technical English, since a coined
-word buys nothing until you spend tokens defining it. Record coined terms in
-`CONTEXT.md`; hunt for restatements a single word would retire.
+A **leading word** is a compact concept the model already holds from pretraining —
+`seam`, `tight` loop, `red`, `tracer bullet`, `blast radius`. Repeat it as a token; it
+anchors behaviour cheaply and improves triggering, since the word already lives in how
+I phrase prompts. Prefer ordinary technical English; a coined word buys nothing until
+defined. Record coined terms in `CONTEXT.md`; hunt for restatements one word would retire.
 
 ## Prompt the positive
 
@@ -234,21 +237,16 @@ pointer rather than a code reference, and is unaffected.
 Skills degrade by accumulation, so removal is a standing task rather than a cleanup
 phase. Each failure mode has a detectable tell:
 
-- **No-op** — an instruction the model already obeys by default. The test is _does this
-  change behaviour versus the default?_, which is model-relative: a disagreement about it
-  is a disagreement about the default, settled by running the skill. Delete the whole
-  sentence rather than trimming words from it.
-- **Duplication** — one meaning in two places. Keep a single source of truth per
-  meaning. Repeating a leading word is the deliberate opposite: the token repeats, the
-  meaning is stated once.
-- **Cache** — restating what the environment already says: `package.json` scripts,
-  config files, `--help` output. Cache the unwritten convention, the reason behind a
-  choice, the gotcha no config confesses; leave one-command lookups to the environment,
-  where they cannot go stale.
+- **No-op** — an instruction the model already obeys by default. Test: _does this change
+  behaviour versus the default?_ Settled by running the skill. Delete the sentence.
+- **Duplication** — one meaning in two places. Single source of truth. Repeating a
+  leading word is the deliberate opposite: token repeats, meaning stated once.
+- **Cache** — restating what the environment already says (`package.json`, `--help`).
+  Cache unwritten conventions and gotchas; leave one-command lookups to the environment.
 - **Sprawl** — too long even when every line is live; hold `SKILL.md` under 500 lines.
-  Cure it with the ladder rather than by trimming words.
-- **Sediment** — guidance describing behaviour the repo no longer has. The tell is a
-  claim that fails when checked against the filesystem or a run.
+  Cure with the ladder, not word-trimming.
+- **Sediment** — guidance for behaviour the repo no longer has. Tell: claim fails against
+  the filesystem or a run.
 
 ## Done when
 
@@ -256,6 +254,8 @@ A skill is finished when:
 
 - The frontmatter carries nothing beyond the four allowed keys, and `name` matches the
   directory.
+- A plugin that ships it has valid `plugin.json` (Agent Plugins 1.0.0) and a
+  self-contained built package containing the skill under `skills/`.
 - A model-invoked skill either carries trigger phrasing for the agent or is named by
   another skill that invokes it; otherwise it is user-invoked.
 - The description matches the invocation mode.
