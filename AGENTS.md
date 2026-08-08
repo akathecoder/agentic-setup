@@ -48,12 +48,12 @@ path under `~/.agents/` when allowed). The link script is not written yet; link 
 
 ## Where agent-authored files go
 
-Everything an agent writes that is not source code goes under `.agents/` at the root of
-the repo it is working in, nested by **project** — a named workload that may be narrower
-than the repo:
+Everything an agent writes that is not source code goes under `.agents/projects/` at
+the root of the repo it is working in, nested by **project** — a named workload that
+may be narrower than the repo:
 
 ```
-.agents/<project>/
+.agents/projects/<project>/
   CONTEXT.md           # what this project is; enough to re-orient next session
   LINKS.md             # Jira, Confluence, repos, and other refs for this project
   tasks/todo.md        # working plan for the current task
@@ -65,13 +65,13 @@ Pick `<project>` from conversation context (ticket keys, Confluence links, what 
 If I name one, use that; otherwise choose a short kebab-case slug and stay consistent.
 When several project folders could fit and context does not settle it, ask me once.
 
-**Local to the machine, not to the task.** Files under `.agents/` persist across sessions
-so the next agent can read `CONTEXT.md` and `LINKS.md` instead of re-asking. They are
-gitignored — they do not travel through git history or onto other developers' machines.
-Do not delete them when a task finishes; I remove a project folder when I am done with
-it. Moving an artifact somewhere durable (`docs/`, an ADR directory, a committed spec)
-is my explicit call and never a default. Add `.agents/` to the repo's `.gitignore` when
-it is missing.
+**Local to the machine, not to the task.** Files under `.agents/projects/` persist
+across sessions so the next agent can read `CONTEXT.md` and `LINKS.md` instead of
+re-asking. They are gitignored — they do not travel through git history or onto other
+developers' machines. Do not delete them when a task finishes; I remove a project
+folder when I am done with it. Moving an artifact somewhere durable (`docs/`, an ADR
+directory, a committed spec) is my explicit call and never a default. Add `.agents/` to
+the repo's `.gitignore` when it is missing.
 
 The repo-root `CONTEXT.md` in _this_ authoring repo is a different file: the committed
 leading-word glossary. A project's `CONTEXT.md` is uncommitted working memory for that
@@ -79,8 +79,8 @@ workload only.
 
 This layout holds even where the repo already keeps plans or docs of its own, so a
 skill behaves identically in every repo. A skill that produces an artifact names the
-path shape `.agents/<project>/…` in its own body, since it travels to repos this file
-never reaches.
+path shape `.agents/projects/<project>/…` in its own body, since it travels to repos
+this file never reaches.
 
 ## Skill, rule, or AGENTS.md?
 
