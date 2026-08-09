@@ -1,0 +1,16 @@
+---
+description: Draft tracker progress updates after meaningful implementation or review milestones.
+globs: "**/*"
+alwaysApply: true
+---
+
+# Ticket Progress
+
+After a significant implementation or review milestone, assess whether tracker
+progress needs communicating. When it does, invoke `update-ticket` to draft the
+update and obtain user approval before posting.
+
+Before: implementation finishes and the ticket receives no progress update.
+
+After: implementation finishes, the agent invokes `update-ticket`, presents the
+proposed update, and posts it only after approval.
