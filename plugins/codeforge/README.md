@@ -85,3 +85,4 @@ from `rules/` when using individual skills in Cursor.
 - `to-confluence` - Draft concise, standalone Confluence pages from project knowledge,
   then publish only after approval.
 - `bro-what` - Re-explain the previous response in plain, easy-to-follow language.
+- `unslop` - Edit reader-facing prose to sound specific, direct, and human.
