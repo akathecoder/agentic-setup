@@ -11,8 +11,9 @@ and capturing settled knowledge when it crystallizes.
 
 ## Project Artifacts
 
-Use `.agents/projects/<project>/` for all project artifacts. Create only the files that have
-content to hold:
+Use `<repository-root>/.agents/projects/<project>/` for all project artifacts. Resolve
+the repository root before reading or writing; never use a global agent-installation
+directory. Create only the files that have content to hold:
 
 - `CONTEXT.md` holds a concise project description, confirmed facts, tracker choice,
   reusable non-secret configuration references, relevant links, and domain language.

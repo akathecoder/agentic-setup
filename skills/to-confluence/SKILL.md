@@ -10,6 +10,9 @@ Create or update a teammate-facing Confluence page from the current discussion a
 the active project's artifacts. The page must stand alone: its readers do not have
 access to the local repository, `.agents/projects/<project>/`, or the agent conversation.
 
+Resolve every `.agents/projects/` path from the repository root; never read or write
+project artifacts in a global agent-installation directory.
+
 ## Process
 
 1. Identify the active project and the requested document purpose. Read the relevant

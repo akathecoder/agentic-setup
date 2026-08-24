@@ -9,6 +9,9 @@ Use this skill when a significant implementation or code-review milestone change
 project's meaningful progress, or when the current ticket needs clarification. It is
 for progress communication, not ticket workflow management.
 
+Resolve every `.agents/projects/` path from the repository root; never read or write
+project artifacts in a global agent-installation directory.
+
 ## Scope
 
 This skill may draft and, after explicit user approval, perform only these updates:

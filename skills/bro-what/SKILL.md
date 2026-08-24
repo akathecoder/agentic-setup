@@ -8,6 +8,9 @@ disable-model-invocation: true
 
 The last response did not land. Re-pitch it:
 
+When reading project context, resolve `.agents/projects/` from the active repository
+root, never from a global agent-installation directory.
+
 1. Start with the minimum context needed to understand the point.
 2. State the main conclusion in plain language.
 3. Explain unfamiliar technical terms before using them, including project terms from

@@ -9,6 +9,9 @@ disable-model-invocation: true
 Break the approved plan, spec, or current conversation into **tracer-bullet**
 vertical-slice tickets. Each ticket declares the work that blocks it.
 
+Resolve every `.agents/projects/` path from the repository root; never read or write
+project artifacts in a global agent-installation directory.
+
 ## Process
 
 1. Identify the active project. Read its context, links, spec, ADRs, and any supplied

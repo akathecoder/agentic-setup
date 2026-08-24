@@ -8,6 +8,9 @@ description: Relentless decision interview. Use when a plan, design, or idea nee
 Interview the user until you reach a shared understanding. Map the topic as a
 **design tree**: every decision branches into the decisions that hang off it.
 
+Resolve every `.agents/projects/` path from the repository root; never read or write
+project artifacts in a global agent-installation directory.
+
 ## Process
 
 1. Identify the active project. Read `.agents/projects/<project>/CONTEXT.md` and `LINKS.md`

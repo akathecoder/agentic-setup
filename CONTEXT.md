@@ -11,16 +11,17 @@ drift, `Avoid:` names them.
 ## Authoring vocabulary
 
 **Project**
-A named workload under `.agents/projects/<project>/`, possibly narrower than the git repo.
-All agent-authored files for that workload live there, including its own `CONTEXT.md`
-and `LINKS.md`. The slug is kebab-case; I may name it, otherwise the agent chooses
-from conversation context and stays consistent.
+A named workload under `<repository-root>/.agents/projects/<project>/`, possibly
+narrower than the git repo. All agent-authored files for that workload live there,
+including its own `CONTEXT.md` and `LINKS.md`; never in a global agent-installation
+directory. The slug is kebab-case; I may name it, otherwise the agent chooses from
+conversation context and stays consistent.
 _Avoid_: workstream, initiative (when meaning this folder)
 
 **Project context**
-The uncommitted `.agents/projects/<project>/CONTEXT.md` — working memory for that workload so
-a later session can re-orient without re-asking. Distinct from this file (the
-committed leading-word glossary at the authoring-repo root).
+The uncommitted `<repository-root>/.agents/projects/<project>/CONTEXT.md` — working
+memory for that workload so a later session can re-orient without re-asking. Distinct
+from this file (the committed leading-word glossary at the authoring-repo root).
 
 **Context pointer**
 A reference held in the agent's context that names material outside it and encodes
@@ -129,7 +130,8 @@ when checked against the filesystem or a run.
 
 ## Relationships
 
-- A **project** owns `.agents/projects/<project>/`; its **project context** is not this glossary.
+- A **project** owns `<repository-root>/.agents/projects/<project>/`; its **project
+  context** is not this glossary.
 - A **context pointer** guards a **disclosed reference**; its wording decides how
   reliably the agent reaches it.
 - **Invocation** decides which load a skill spends: model-invoked spends **context

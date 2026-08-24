@@ -8,6 +8,9 @@ disable-model-invocation: true
 
 Implement approved work described by the active project's spec or tickets.
 
+Resolve every `.agents/projects/` path from the repository root; never read or write
+project artifacts in a global agent-installation directory.
+
 ## Process
 
 1. Identify the active project. Read `.agents/projects/<project>/CONTEXT.md`, `LINKS.md`,

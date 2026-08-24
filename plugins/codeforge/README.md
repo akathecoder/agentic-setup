@@ -5,8 +5,9 @@ ticket communication, and documentation. It includes adapted Matt Pocock workflo
 companion skills for Jira, GitHub, Confluence, Cursor Canvas, and long-running project
 context.
 
-All project artifacts created by these skills live locally under
-`.agents/projects/<project>/`.
+All project artifacts created by these skills live under
+`<repository-root>/.agents/projects/<project>/`, never a global agent-installation
+directory such as `~/.agents/`.
 
 ## Installation
 

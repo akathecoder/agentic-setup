@@ -14,6 +14,9 @@ Review the diff between `HEAD` and a fixed point along two independent axes:
 
 Run the axes in parallel and preserve the separation when reporting results.
 
+Resolve every `.agents/projects/` path from the repository root; never read or write
+project artifacts in a global agent-installation directory.
+
 ## Process
 
 1. Determine the fixed point from the user or the invoking implementation workflow.

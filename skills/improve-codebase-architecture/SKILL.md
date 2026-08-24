@@ -10,6 +10,9 @@ Surface architectural friction as **deepening opportunities**: refactors that tu
 shallow modules into deep ones. Use the `codebase-design` vocabulary throughout and
 respect the active project's domain language and ADRs.
 
+Resolve every `.agents/projects/` path from the repository root; never read or write
+project artifacts in a global agent-installation directory.
+
 ## Process
 
 1. Scope before scanning. Use a direction named by the user, or inspect a useful span

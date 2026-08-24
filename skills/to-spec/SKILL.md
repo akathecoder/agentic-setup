@@ -10,6 +10,9 @@ Synthesize the current conversation, active project artifacts, and codebase
 understanding into a specification. Do not interview the user; use `grill-with-docs`
 when decisions remain unresolved.
 
+Resolve every `.agents/projects/` path from the repository root; never read or write
+project artifacts in a global agent-installation directory.
+
 ## Process
 
 1. Identify the active project and read `.agents/projects/<project>/CONTEXT.md`, `LINKS.md`,

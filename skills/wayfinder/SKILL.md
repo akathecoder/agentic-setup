@@ -15,6 +15,9 @@ Wayfinder plans by default. Hand off to `to-spec` and `to-tickets` when the rout
 clear. The decision tickets in this skill are not the implementation tickets created
 by `to-tickets`.
 
+Resolve every `.agents/projects/` path from the repository root; never read or write
+project artifacts in a global agent-installation directory.
+
 ## The Map
 
 The active project's map lives at `.agents/projects/<project>/wayfinder.md` and is published

@@ -14,6 +14,9 @@ evidence. Treat resolved threads as prior decisions and leave them untouched.
 
 Leave all code changes uncommitted and do not push.
 
+Resolve every `.agents/projects/` path from the repository root; never read or write
+project artifacts in a global agent-installation directory.
+
 ## Process
 
 1. Identify the active project and read its context, links, spec, ticket references,
