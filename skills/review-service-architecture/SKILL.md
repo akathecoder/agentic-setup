@@ -11,6 +11,11 @@ Review a functioning pre-production service before its structure becomes costly 
 change. Preserve confirmed business behavior. Ground the design in real entry flows,
 domain boundaries, and preservation constraints rather than a generic folder template.
 
+This skill is read-only for the reviewed repository. Create review artifacts only under
+`.agents/projects/<project>/`; do not edit application code, root `AGENTS.md`, CI,
+configuration, documentation, schemas, or any other repository file. Implementation and
+adoption happen only in a separately approved workflow.
+
 This is an enterprise architecture review, not a file-by-file style review and not a
 mandate to introduce layers. A layer earns its place only when it owns behavior, policy,
 or an infrastructure boundary that callers should not learn. Prefer domain packages with
@@ -115,21 +120,24 @@ Resolve every `.agents/projects/` path from the service repository root.
    error translation, preservation constraint, and test seam explicit and the user has
    approved the design.
 
-5. Turn the approved target into repository guidance. Create or update root `AGENTS.md`.
-   Preserve existing applicable instructions; reconcile conflicts with the approved
-   target instead of replacing instructions with generic boilerplate. The guidance must
-   state the dependency rule, package responsibilities, allowed shared capabilities,
-   domain and contract ownership, interface placement, error and logging policy, testing
-   expectations, coverage policy, required local and CI checks, and how an exception is
-   proposed and recorded.
+5. Turn the approved target into a repository-guidance recommendation. Write
+   `.agents/projects/<project>/agents-md-draft.md` as a ready-to-apply root `AGENTS.md`
+   draft. Reconcile existing applicable instructions with the approved target instead of
+   replacing them with generic boilerplate. The draft must state the dependency rule,
+   package responsibilities, allowed shared capabilities, domain and contract ownership,
+   interface placement, error and logging policy, testing expectations, coverage policy,
+   required local and CI checks, and how an exception is proposed and recorded.
 
    Require behavior-focused tests at public seams. Target 100% coverage for changed
    behavior and require at least 95% for the agreed scope, with every intentional
    exclusion named and justified. Coverage never substitutes for assertions of business
    outcomes, failure paths, cancellation, or infrastructure failure modes.
 
-   Done when the repository has concrete, target-specific `AGENTS.md` guidance that a
-   new contributor can apply without inferring the architecture.
+   Do not create or update root `AGENTS.md`. It remains a recommendation for the later
+   implementation workflow.
+
+   Done when `agents-md-draft.md` gives a new contributor target-specific guidance
+   without inferring the architecture.
 
 6. Write `.agents/projects/<project>/rearchitecture-plan.md`. Order migration by
    behavioral safety and dependency direction: characterize critical behavior, establish
@@ -137,8 +145,9 @@ Resolve every `.agents/projects/` path from the service repository root.
    the new checks. Each wave names the behavior and preservation constraints, affected
    packages or contracts, test proof, rollback or recovery action, and completion signal.
    Prefer direct replacement over compatibility scaffolding when no consumer or
-   persisted data requires compatibility. Do not change runtime behavior or begin
-   implementation in this skill.
+   persisted data requires compatibility. Do not change runtime behavior, begin
+   implementation, or modify any file outside `.agents/projects/<project>/` in this
+   skill.
 
    End with the ranked findings, their evidence and business impact, the visual report
    location, the target design and guidance locations, the approved migration order, and
@@ -154,7 +163,8 @@ Resolve every `.agents/projects/` path from the service repository root.
   and call paths rather than assumed.
 - A Canvas or self-contained HTML visual communicates current and target structure.
 - `architecture-design.md` records an approved, domain-owned target architecture.
-- Root `AGENTS.md` gives target-specific repository guidance.
+- `agents-md-draft.md` contains target-specific root `AGENTS.md` guidance without
+  modifying the repository.
 - The migration plan preserves business behavior, uses testable vertical slices, and
   makes its coverage exceptions explicit.
-- No application code or runtime behavior changed during the review.
+- No repository file outside `.agents/projects/<project>/` changed during the review.
