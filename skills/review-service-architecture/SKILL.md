@@ -54,11 +54,19 @@ Resolve every `.agents/projects/` path from the service repository root.
    external dependency.
 
    Assess ownership, dependency direction, module depth, locality, contract discipline,
-   failure behavior, observability, and engineering controls. For every candidate,
-   record concrete file, symbol, and call-path evidence; the leakage or shallow
-   interface; its change or operational cost; and the deletion-test result. Record
-   preservation constraints for contracts, topics, schemas, idempotency, transactions,
-   state transitions, external-call ordering, and operational behavior where applicable.
+   failure behavior, observability, engineering controls, and design patterns. For every
+   candidate, record concrete file, symbol, and call-path evidence; the leakage or
+   shallow interface; its change or operational cost; and the deletion-test result.
+   Record preservation constraints for contracts, topics, schemas, idempotency,
+   transactions, state transitions, external-call ordering, and operational behavior
+   where applicable.
+
+   Add a `## Design Patterns` section to
+   `.agents/projects/<project>/architecture-review.md`. For each consequential existing
+   pattern or anti-pattern, state its context, concrete evidence, the force it addresses,
+   the benefit or cost it creates, and whether it remains appropriate. Do not recommend a
+   pattern merely because its name matches the code shape. This is a current-state
+   assessment, not a target-design decision.
 
    Done when every critical flow has an evidence-backed current-state map and every
    candidate distinguishes a hard risk from a preference.
@@ -73,7 +81,8 @@ Resolve every `.agents/projects/` path from the service repository root.
    Cursor Canvas when available; otherwise create the self-contained HTML fallback. The
    visual must show the current and target call or dependency structure, highest-risk
    leakage, candidate deep modules, preservation constraints, and recommendation
-   strength. Keep the supporting findings in
+   strength. Show a design-pattern change only when it materially explains a candidate
+   or target flow. Keep the supporting findings in
    `.agents/projects/<project>/architecture-review.md`. Ask the user to select the
    candidate or candidates to design.
 
@@ -113,8 +122,13 @@ Resolve every `.agents/projects/` path from the service repository root.
    of truth. It names current risks, target package responsibilities and dependency rule,
    domain and contract ownership, error taxonomy, test seams, quality gates,
    cross-service implications, rejected alternatives, and unresolved decisions. Include
-   a proposed directory and package map only as the approved target, not a stale
-   inventory of current source locations.
+   a `## Design Patterns` section that records the retained, introduced, and rejected
+   patterns. For each decision, state the problem and forces, the selected pattern or
+   deliberate absence of one, alternatives considered, ownership boundary,
+   consequences, and behavior-focused test proof. A service may use different patterns
+   at different boundaries; the section must explain how they compose rather than list
+   them independently. Include a proposed directory and package map only as the approved
+   target, not a stale inventory of current source locations.
 
    Done when the target architecture makes every selected flow, ownership boundary,
    error translation, preservation constraint, and test seam explicit and the user has
