@@ -215,6 +215,11 @@ code by its types and behaviours, never by source paths or line numbers, which r
 the write and the read. Pointing at this repo's own conventional files is a context
 pointer rather than a code reference, and is unaffected.
 
+Cloud and repository comments stand alone: Jira, Confluence, GitHub, and source-code
+comments state the relevant decision, behaviour, and rationale directly. Do not refer to
+local ADRs, project artifacts, or other uncommitted documents, because their readers
+cannot access them.
+
 ## Pruning
 
 Skills degrade by accumulation, so removal is a standing task rather than a cleanup
