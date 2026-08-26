@@ -12,14 +12,6 @@ Skills follow the [Agent Skills spec](https://agentskills.io/specification): a
 directory containing `SKILL.md` with YAML frontmatter. One `SKILL.md` serves every
 harness, with no per-harness sidecars (`agents/openai.yaml`, `.claude/` variants).
 
-**Plugins follow [Agent Plugins](https://agent-plugins.org/specification) 1.0.0.** A
-plugin definition composes canonical skills (and optional MCP) without duplicating their
-authorship. Build it into a self-contained distributable plugin: every packaged path,
-including symlinks, resolves within that plugin root. Client-only behaviour lives under
-reverse-domain namespaces (`extensions` and/or a top-level directory of that name), never
-as portable top-level fields. MCP, when needed, is root `mcp.json` at the same schema
-version as `plugin.json`.
-
 **Cursor is the first-class harness.** Where a portable choice and a Cursor-specific
 one conflict, take the portable one and note the Cursor behaviour beside it.
 
@@ -28,23 +20,12 @@ one conflict, take the portable one and note the Cursor behaviour beside it.
 ```
 skills/<skill-name>/SKILL.md   # canonical skill source; one directory per skill, flat
 rules/<rule-name>.mdc          # canonical rules; see rules/AGENTS.md to write one
-plugins/<plugin-name>/
-  plugin.json                  # source manifest; $schema + name at minimum
-  skills/<skill-name> -> …     # source selection symlink into skills/<skill-name>
-  mcp.json                     # only when the plugin ships MCP
-  <reverse-domain>/            # client extension sources, including client rules
-dist/plugins/<plugin-name>/    # generated self-contained installable plugin
 CONTEXT.md                     # leading-word glossary; read before naming a concept
 ```
 
-Author skills and rules in their canonical trees. A plugin definition selects them by
-symlink — never copy. The build copies selected content into `dist/plugins/`; do not
-install a source definition. Plugin `name` matches its directory and the Agent Plugins
-name constraints. Split plugins when install or enablement should be independent.
-
-Skills still install by symlink into `~/.agents/skills/<name>`, rules into
-`~/.cursor/rules/`, and plugins into the client's plugin root (prefer a harness-neutral
-path under `~/.agents/` when allowed). The link script is not written yet; link manually.
+Author skills and rules in their canonical trees. Skills install by symlink into
+`~/.agents/skills/<name>` and rules into `~/.cursor/rules/`. The link script is not
+written yet; link manually.
 
 ## Where agent-authored files go
 
@@ -256,8 +237,6 @@ A skill is finished when:
 
 - The frontmatter carries nothing beyond the four allowed keys, and `name` matches the
   directory.
-- A plugin that ships it has valid `plugin.json` (Agent Plugins 1.0.0) and a
-  self-contained built package containing the skill under `skills/`.
 - A model-invoked skill either carries trigger phrasing for the agent or is named by
   another skill that invokes it; otherwise it is user-invoked.
 - The description matches the invocation mode.

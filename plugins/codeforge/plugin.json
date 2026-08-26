@@ -1,6 +1,0 @@
-{
-  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
-  "name": "codeforge",
-  "version": "1.0.0",
-  "description": "Planning, implementation, review, and documentation workflows for deliberate software engineering."
-}
