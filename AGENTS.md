@@ -41,7 +41,8 @@ as `~/.agents/`:
   LINKS.md             # Jira, Confluence, repos, and other refs for this project
   tasks/todo.md        # working plan for the current task
   tasks/lessons.md     # corrections from me, so a mistake stops recurring
-  <name>.md            # research notes, handoffs, scratch analysis
+  handoffs/<id>.md     # session handoffs; unique hash per file
+  <name>.md            # research notes, scratch analysis
 ```
 
 Pick `<project>` from conversation context (ticket keys, Confluence links, what I said).

@@ -58,6 +58,7 @@ documentation for its installation and configuration steps.
 
 ### Utility
 
-| Skill      | Use case                                            |
-| ---------- | --------------------------------------------------- |
-| `bro-what` | Re-explain the previous response in plain language. |
+| Skill      | Use case                                                                       |
+| ---------- | ------------------------------------------------------------------------------ |
+| `handoff`  | Compact the current conversation into a project handoff for a fresh agent.     |
+| `bro-what` | Re-explain the previous response in plain language.                            |
