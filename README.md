@@ -36,6 +36,8 @@ documentation for its installation and configuration steps.
 | `improve-codebase-architecture` | Find codebase architecture improvements and work through a selected opportunity.             |
 | `review-service-architecture`   | Assess a service, propose a behavior-preserving target architecture, and plan its migration. |
 | `grilling`                      | Stress-test an idea, plan, or design by resolving its open decisions.                        |
+| `grill-me`                      | Relentless interview to sharpen a plan or design, without writing project artifacts.         |
+| `prototype`                     | Throwaway prototype that answers a design question about logic, state, or UI.                |
 | `wayfinder`                     | Map a large, uncertain project as decision tickets before implementation begins.             |
 | `domain-modeling`               | Clarify and record project terminology, facts, and durable design decisions.                 |
 | `codebase-design`               | Design deeper module boundaries, interfaces, seams, and test strategies.                     |
@@ -47,18 +49,23 @@ documentation for its installation and configuration steps.
 | `tdd`                | Build or fix code through a red-green-refactor testing loop.                               |
 | `code-review`        | Review a branch, pull request, or working diff against project requirements and standards. |
 | `triage-pr-feedback` | Validate PR review feedback, fix valid findings, and resolve review threads.               |
+| `wizard`             | Walk a human through a manual procedure only they can perform.                             |
 
 ### Documentation And Communication
 
-| Skill           | Use case                                                                                       |
-| --------------- | ---------------------------------------------------------------------------------------------- |
-| `to-confluence` | Turn project knowledge into a concise, standalone Confluence page.                             |
-| `update-ticket` | Draft a meaningful Jira or GitHub progress update for approval before posting.                 |
-| `unslop`        | Edit documentation, tickets, or other reader-facing prose to be direct, natural, and specific. |
+| Skill              | Use case                                                                                       |
+| ------------------ | ---------------------------------------------------------------------------------------------- |
+| `to-confluence`    | Turn project knowledge into a concise, standalone Confluence page.                             |
+| `update-ticket`    | Draft a meaningful Jira or GitHub progress update for approval before posting.                 |
+| `unslop`           | Edit documentation, tickets, or other reader-facing prose to be direct, natural, and specific. |
+| `research`         | Investigate a question against primary sources and write cited findings.                       |
+| `to-questionnaire` | Turn a decision only someone else can answer into a questionnaire for them.                    |
 
 ### Utility
 
-| Skill      | Use case                                                                       |
-| ---------- | ------------------------------------------------------------------------------ |
-| `handoff`  | Compact the current conversation into a project handoff for a fresh agent.     |
-| `bro-what` | Re-explain the previous response in plain language.                            |
+| Skill                | Use case                                                                     |
+| -------------------- | ---------------------------------------------------------------------------- |
+| `handoff`            | Compact the current conversation into a project handoff for a fresh agent.   |
+| `bro-what`           | Re-explain the previous response in plain language.                          |
+| `teach`              | Teach a skill or concept over multiple sessions in a project workspace.      |
+| `writing-for-agents` | Reference for writing skills, AGENTS.md, and other agent-consumed documents. |

@@ -93,6 +93,18 @@ _Avoid_: checkpoint, approval step, HITL
 The named list of completion criteria closing a multi-step skill.
 _Avoid_: definition of done, acceptance criteria, exit checklist
 
+## Investigation and teaching
+
+**Primary source**
+The document or system that owns a claim: official docs, specs, source code,
+first-party APIs. Research and teaching follow every claim back to this.
+_Avoid_: blog recap, tutorial, secondary write-up (when meaning the source of a fact)
+
+**Zone of proximal development**
+The next thing the learner cannot yet do unaided, just beyond what they have
+demonstrated. A teach lesson sits here.
+_Avoid_: next topic, curriculum item (when meaning this)
+
 ## Skill shapes
 
 **Delegator**
