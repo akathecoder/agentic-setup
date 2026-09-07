@@ -69,3 +69,4 @@ documentation for its installation and configuration steps.
 | `bro-what`           | Re-explain the previous response in plain language.                          |
 | `teach`              | Teach a skill or concept over multiple sessions in a project workspace.      |
 | `writing-for-agents` | Reference for writing skills, AGENTS.md, and other agent-consumed documents. |
+| `install-from-catalog` | Install a chosen third-party skill, plugin, or extension from a curated catalog. |

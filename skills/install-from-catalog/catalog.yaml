@@ -1,0 +1,7 @@
+entries:
+  - id: go-modern-guidelines
+    name: Modern Go Guidelines
+    type: [plugin, skill, extension]
+    source: JetBrains/go-modern-guidelines
+    npx-skills: false
+    guide: go-modern-guidelines.md
