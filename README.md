@@ -6,6 +6,7 @@ This repository is the source of truth for reusable agent skills and Cursor rule
 
 - `skills/` - Canonical portable skill sources.
 - `rules/` - Canonical Cursor rule sources.
+- `WATCHLIST.md` - Skills, extensions, and use cases not yet in the workflow.
 
 ## Installing Skills
 
