@@ -61,6 +61,7 @@ documentation for its installation and configuration steps.
 | `unslop`           | Edit documentation, tickets, or other reader-facing prose to be direct, natural, and specific. |
 | `research`         | Investigate a question against primary sources and write cited findings.                       |
 | `to-questionnaire` | Turn a decision only someone else can answer into a questionnaire for them.                    |
+| `ntfy-notify`      | Publish a user update through ntfy with CLI-first delivery and a curl fallback.                |
 
 ### Utility
 
