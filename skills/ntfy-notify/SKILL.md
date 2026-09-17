@@ -21,24 +21,26 @@ The topic must match `[-_A-Za-z0-9]{1,64}`. If neither source provides a valid t
 fail clearly and ask the user for one. Do not create a topic configuration unless the
 user asks; ntfy creates a topic when it is first published to.
 
-Use `NTFY_SERVER` from the shell environment when it is set; otherwise publish to
-`https://ntfy.sh`. For access-token authentication, use `NTFY_ACCESS_TOKEN` from the
-shell environment, falling back to `NTFY_TOKEN` for compatibility. Never put a token
-in `.ntfyconfig`, source control, or a user-facing message. If the server requires
+Use `NTFY_SERVER` from the shell environment as the server URL. If it is unset or
+invalid, do not publish and ask the user to configure it; never fall back to a default
+server URL. For access-token authentication, use `NTFY_ACCESS_TOKEN` from the shell
+environment, falling back to `NTFY_TOKEN` for compatibility. Never put a token in
+`.ntfyconfig`, source control, or a user-facing message. If the server requires
 authentication and no token is available, report the publish failure and ask the user
 to provide `NTFY_ACCESS_TOKEN` in the environment.
 
 ## Send a message
 
-Set `title`, `message`, `priority`, and `tag` for the update. ntfy accepts priorities
-`min`, `low`, `default`, `high`, and `urgent`; its tags are comma-separated emoji
-shortcodes or labels.
+Set `title`, `message`, `priority`, and `tag` for the update. Write `message` as
+Markdown so it can carry readable detail: use short headings, bullets, links, and
+inline code where useful. ntfy accepts priorities `min`, `low`, `default`, `high`,
+and `urgent`; its tags are comma-separated emoji shortcodes or labels.
 
 When `ntfy` is on `PATH`, publish with the CLI. Pass the complete URL so that the
 configured server is used rather than the CLI's local default host:
 
 ```sh
-ntfy publish --title "$title" --priority "$priority" --tags "$tag" \
+ntfy publish --markdown --title "$title" --priority "$priority" --tags "$tag" \
   "$server/$topic" "$message"
 ```
 
@@ -52,6 +54,7 @@ curl --fail --silent --show-error \
   -H "Title: $title" \
   -H "Priority: $priority" \
   -H "Tags: $tag" \
+  -H "Markdown: yes" \
   --data "$message" "$server/$topic"
 ```
 
@@ -68,5 +71,6 @@ actionable error without exposing secrets.
 ## Done when
 
 - A valid topic came from the user or `.ntfyconfig`.
+- A valid `NTFY_SERVER` was configured.
 - The message was accepted by ntfy, or the user received the reason it could not be
   sent.
