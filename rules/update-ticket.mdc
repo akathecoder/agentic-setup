@@ -1,16 +1,17 @@
 ---
-description: Draft tracker progress updates after meaningful implementation or review milestones.
+description: Sync completed Jira checklist items and draft tracker progress updates.
 globs: "**/*"
 alwaysApply: true
 ---
 
 # Ticket Progress
 
-After a significant implementation or review milestone, assess whether tracker
-progress needs communicating. When it does, invoke `update-ticket` to draft the
-update and obtain user approval before posting.
+Whenever a Jira task completes, invoke `update-ticket` to check its item in the main
+ticket after required verification. Completion marks are already authorized. After a
+significant implementation or review milestone, also assess whether a progress comment
+is needed; draft comments and other description changes for approval before posting.
 
-Before: implementation finishes and the ticket receives no progress update.
+Before: a task finishes and the main Jira checklist remains unchecked.
 
-After: implementation finishes, the agent invokes `update-ticket`, presents the
-proposed update, and posts it only after approval.
+After: the agent verifies the task and checks its item in the main Jira ticket, then
+presents any additional progress comment for approval before posting.

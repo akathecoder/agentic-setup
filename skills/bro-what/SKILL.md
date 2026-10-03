@@ -8,8 +8,10 @@ disable-model-invocation: true
 
 The last response did not land. Re-pitch it:
 
-When reading project context, resolve `.agents/projects/` from the active repository
-root, never from a global agent-installation directory.
+When reading project context, resolve `.agents/projects/` from the opened workspace
+root, even when the active repository is nested inside it. In a single-repository
+workspace, use the repository root. Keep this root fixed when changing directories;
+never read project artifacts from nested repositories or global agent installations.
 
 1. Start with the minimum context needed to understand the point.
 2. State the main conclusion in plain language.

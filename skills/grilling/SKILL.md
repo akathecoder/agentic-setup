@@ -8,8 +8,10 @@ description: Relentless decision interview. Use when a plan, design, or idea nee
 Interview the user until you reach a shared understanding. Map the topic as a
 **design tree**: every decision branches into the decisions that hang off it.
 
-Resolve every `.agents/projects/` path from the repository root; never read or write
-project artifacts in a global agent-installation directory.
+Resolve every `.agents/projects/` path from the opened workspace root, including
+when the active repository is nested inside it. In a single-repository workspace,
+that is the repository root. Keep this artifact root fixed when changing directories;
+never use nested repositories or global agent-installation directories for artifacts.
 
 ## Process
 

@@ -10,16 +10,21 @@ drift, `Avoid:` names them.
 
 ## Authoring vocabulary
 
+**Workspace root**
+The directory opened for the current session, identified from workspace context or
+the user. It can contain several repositories; changing into one keeps the workspace
+root fixed. In a single-repository workspace it is the repository root.
+
 **Project**
-A named workload under `<repository-root>/.agents/projects/<project>/`, possibly
-narrower than the git repo. All agent-authored files for that workload live there,
+A named workload under `<workspace-root>/.agents/projects/<project>/`, possibly
+spanning several git repos. All agent-authored files for that workload live there,
 including its own `CONTEXT.md` and `LINKS.md`; never in a global agent-installation
 directory. The slug is kebab-case; I may name it, otherwise the agent chooses from
 conversation context and stays consistent.
 _Avoid_: workstream, initiative (when meaning this folder)
 
 **Project context**
-The uncommitted `<repository-root>/.agents/projects/<project>/CONTEXT.md` — working
+The uncommitted `<workspace-root>/.agents/projects/<project>/CONTEXT.md` — working
 memory for that workload so a later session can re-orient without re-asking. Distinct
 from this file (the committed leading-word glossary at the authoring-repo root).
 
@@ -142,7 +147,7 @@ when checked against the filesystem or a run.
 
 ## Relationships
 
-- A **project** owns `<repository-root>/.agents/projects/<project>/`; its **project
+- A **project** owns `<workspace-root>/.agents/projects/<project>/`; its **project
   context** is not this glossary.
 - A **context pointer** guards a **disclosed reference**; its wording decides how
   reliably the agent reaches it.

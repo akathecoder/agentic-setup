@@ -1,6 +1,6 @@
 ---
 name: wayfinder
-description: Plan a huge, uncertain project as a map of decision tickets until the route to implementation is clear.
+description: Map an uncertain project as decisions in a main Jira checklist or GitHub Issues until implementation is clear.
 disable-model-invocation: true
 ---
 
@@ -9,14 +9,16 @@ disable-model-invocation: true
 Use Wayfinder when a loose idea is too large or uncertain for one agent session.
 It charts the way to a **destination** as a shared map of **decision tickets**:
 questions whose resolution clarifies the route, not implementation slices that deliver
-the destination.
+the destination. In Jira, each decision ticket means a numbered checklist item in
+the main map ticket; do not create subtickets. In GitHub, each is a separate Issue.
 
 Wayfinder plans by default. Hand off to `to-spec` and `to-tickets` when the route is
-clear. The decision tickets in this skill are not the implementation tickets created
-by `to-tickets`.
+clear. These decisions clarify the plan; the slices produced by `to-tickets` deliver it.
 
-Resolve every `.agents/projects/` path from the repository root; never read or write
-project artifacts in a global agent-installation directory.
+Resolve every `.agents/projects/` path from the opened workspace root, including
+when the active repository is nested inside it. In a single-repository workspace,
+that is the repository root. Keep this artifact root fixed when changing directories;
+never use nested repositories or global agent-installation directories for artifacts.
 
 ## The Map
 
@@ -26,9 +28,11 @@ label. Its decision-ticket drafts live at
 `.agents/projects/<project>/wayfinder-ticket-drafts.md`. The local and tracker maps carry the
 same content; update both after each resolved decision.
 
-The map is an index, not a decision store. Each resolution lives only in its decision
-ticket. In human-facing text, refer to a ticket by its linked title, never a bare
-identifier.
+In Jira, keep the decision checklist and each item's question, type, blockers, owner,
+and resolution in the main map ticket. Use stable item numbers; check an item when
+its decision or blocking task is completed. In GitHub, the map is an index and each
+resolution lives in its decision Issue. Refer to work by its linked title and include
+the checklist item number when several decisions share the main Jira URL.
 
 ```md
 # Wayfinder: <destination>
@@ -44,6 +48,10 @@ identifier.
 ## Decisions So Far
 
 - [<closed ticket title>](link) - <one-line gist of the answer>
+
+## Decisions
+
+<Jira: numbered checklist with item details. GitHub: links to decision Issues.>
 
 ## Not Yet Specified
 
@@ -67,10 +75,11 @@ Each decision ticket has one type and is sized for one fresh agent session:
 - **Task**: a blocking action such as provisioning access or preparing data; it exists
   only to unblock a later decision.
 
-Label each decision ticket `wayfinder:<type>` using its lowercase type. Use the
-configured tracker's native parent/child and blocking relationships. A ticket is
-**unblocked** when all blockers are closed. The **frontier** is the set of open,
-unblocked, unclaimed decision tickets.
+In Jira, prefix each item with `wayfinder:<type>` and state its blocking item numbers
+or external ticket links. In GitHub, label each Issue `wayfinder:<type>` and use
+native parent/child and blocking relationships. A decision is **unblocked** when
+all blockers are completed. The **frontier** is the set of incomplete, unblocked,
+unclaimed decisions.
 
 ## Chart The Map
 
@@ -96,18 +105,19 @@ unblocked, unclaimed decision tickets.
    `.agents/projects/<project>/wayfinder-ticket-drafts.md` describe the map and initial
    decision tickets.
 
-4. Show the map and ticket drafts to the user. Do not create the tracker map or any
-   Jira/GitHub decision ticket until the user explicitly approves the draft. On
-   approval, create the map first, then its child decision tickets, then wire blocking
-   edges in a second pass. If authenticated tooling is unavailable, produce
-   ready-to-paste tracker bodies and record the limitation in project context.
+4. Show the map and decision drafts to the user. Do not publish them until the user
+   explicitly approves the draft. In Jira, update the approved existing main ticket
+   or create one main map ticket containing the decision checklist and item details.
+   In GitHub, create the map first, then its decision Issues, then wire blocking edges.
+   If authenticated tooling is unavailable, produce ready-to-paste tracker bodies
+   and record the limitation in project context.
 
-   Done when the approved map and every initial decision ticket have tracker links, or
-   ready-to-paste equivalents are recorded.
+   Done when the approved map and every initial decision have tracker links and Jira
+   item numbers where applicable, or ready-to-paste equivalents are recorded.
 
 5. Update `CONTEXT.md` and `LINKS.md` with the map URL, tracker choice, ticket links,
-   and current frontier. Start research tickets in parallel where tooling permits;
-   charting itself resolves no decision tickets.
+   Jira item numbers, and current frontier. Start research tickets in parallel where
+   tooling permits; charting itself resolves no decision tickets.
 
    Done when the map is published, project artifacts point to it, and the session has
    stopped before hand-resolving a ticket.
@@ -116,8 +126,9 @@ unblocked, unclaimed decision tickets.
 
 Resolve no more than one non-research ticket per session.
 
-1. Load the map, not every child ticket. Use a ticket supplied by the user, or select
-   the first ticket on the frontier. Claim it in the tracker before beginning so
+1. Load the map. Use a decision supplied by the user, or select the first on the
+   frontier. In Jira, read and record the owner beside the selected checklist item;
+   in GitHub, load and claim its Issue. Claim the decision before beginning so
    concurrent sessions skip it.
 
    Done when one unblocked decision ticket is claimed.
@@ -128,17 +139,24 @@ Resolve no more than one non-research ticket per session.
 
    Done when the ticket's decision or blocking task has a concrete outcome.
 
-3. Post the outcome as a tracker resolution comment, ending with the exact line
-   `Written by Cursor`. Close the ticket and add a linked one-line gist to the map's
-   **Decisions So Far**. Keep detailed reasoning and created assets linked from the
-   ticket rather than duplicating them in the map.
+3. In Jira, invoke `update-ticket` to check the completed item in the main ticket;
+   this completion mark needs no further approval. In GitHub, close the decision
+   Issue. Draft the resolution comment and any other description edits for approval:
+   put the resolution beside the Jira item or in its GitHub Issue and add a linked
+   one-line gist to the map's **Decisions So Far**. Post only approved edits, ending
+   comments with `Written by Cursor`. Mirror the published outcome locally; keep any
+   pending description or comment updates identified until approved and posted.
 
-   Done when the resolution, map index, and local project mirror agree.
+   Done when the Jira checklist item is checked or the GitHub Issue is closed, and
+   the resolution, map index, and local mirror agree; pending tracker updates and
+   access limitations are explicitly recorded.
 
 4. Graduate newly precise fog into fresh decision-ticket drafts. Obtain approval
-   before creating any new Jira/GitHub tickets, then create and wire them. If a ticket
-   is beyond the destination, close it and record a linked reason under **Out Of
-   Scope**. Update or remove tickets invalidated by the decision.
+   before adding Jira checklist items or creating GitHub Issues, then publish their
+   details and blockers. For work beyond the destination, remove its Jira checklist
+   item from active work or close its GitHub Issue, recording a linked reason under
+   **Out Of Scope**. Include changed or invalidated Jira item details in the proposed
+   description update for approval.
 
    Done when the frontier and fog accurately reflect what the resolved decision made
    visible.
@@ -149,3 +167,13 @@ Resolve no more than one non-research ticket per session.
 
    Done when the user has a clear next planning handoff or the map identifies the next
    unresolved frontier ticket.
+
+## Done when
+
+- The approved map accounts for every decision, blocker, and remaining question.
+- Jira decisions are checklist items in the main ticket, with no new subtickets;
+  GitHub decisions have separate Issue links.
+- Completed Jira decisions have checked items, or exact pending updates and tracker
+  access limitations are recorded.
+- Project artifacts mirror published decisions and identify pending tracker edits.
+- The next decision or planning handoff is clear, and implementation has not begun.

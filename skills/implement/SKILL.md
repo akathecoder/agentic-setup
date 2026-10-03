@@ -8,8 +8,10 @@ disable-model-invocation: true
 
 Implement approved work described by the active project's spec or tickets.
 
-Resolve every `.agents/projects/` path from the repository root; never read or write
-project artifacts in a global agent-installation directory.
+Resolve every `.agents/projects/` path from the opened workspace root, including
+when the active repository is nested inside it. In a single-repository workspace,
+that is the repository root. Keep this artifact root fixed when changing directories;
+never use nested repositories or global agent-installation directories for artifacts.
 
 ## Process
 
@@ -21,9 +23,14 @@ project artifacts in a global agent-installation directory.
 
 2. Implement one vertical slice at a time. Use `tdd` at the pre-agreed seams where
    possible. Run typechecking and focused tests regularly; keep the project work list
-   current as slices land.
+   current as slices land. Whenever a Jira task completes and its required verification
+   passes, invoke `update-ticket` to check the corresponding item in the main ticket.
+   This completion update is already authorized; comments and other description
+   changes retain their approval gate.
 
-   Done when each accepted slice is implemented and its focused verification passes.
+   Done when each accepted slice is implemented, its focused verification passes,
+   and its main Jira checklist item is checked or the exact pending update is recorded
+   with the tracker-access limitation.
 
 3. Run the full relevant test suite and the repository's coverage tooling. Target
    100% coverage for changed code and require at least 95%, unless the user or the

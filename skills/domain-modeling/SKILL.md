@@ -11,9 +11,11 @@ and capturing settled knowledge when it crystallizes.
 
 ## Project Artifacts
 
-Use `<repository-root>/.agents/projects/<project>/` for all project artifacts. Resolve
-the repository root before reading or writing; never use a global agent-installation
-directory. Create only the files that have content to hold:
+Use `<workspace-root>/.agents/projects/<project>/` for all project artifacts. Resolve
+the opened workspace root from session context before reading or writing. In a
+single-repository workspace, use the repository root. Keep this root fixed when
+changing directories; never use sub-repositories or global agent-installation
+directories. Create only the files that have content to hold:
 
 - `CONTEXT.md` holds a concise project description, confirmed facts, tracker choice,
   reusable non-secret configuration references, relevant links, and domain language.

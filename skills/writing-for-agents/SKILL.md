@@ -98,9 +98,11 @@ project artifacts, or other uncommitted documents.
 ## Artifact paths
 
 Everything an agent writes that is not source code goes under
-`<repository-root>/.agents/projects/<project>/`. Resolve the repository root
-before creating an artifact; never use a global agent-installation directory.
-A skill that produces an artifact names that path shape in its own body.
+`<workspace-root>/.agents/projects/<project>/`. Resolve the opened workspace root
+from session context before reading or creating an artifact. In a single-repository
+workspace, it is the repository root. Keep this root fixed when changing directories;
+never use sub-repositories or global agent-installation directories for artifacts.
+A skill that produces an artifact names that path shape and resolution in its own body.
 
 ## Pruning
 

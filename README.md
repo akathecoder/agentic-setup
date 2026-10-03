@@ -27,7 +27,7 @@ documentation for its installation and configuration steps.
 | ----------------- | -------------------------------------------------------------------------------------------------------- |
 | `grill-with-docs` | Interview a change or design until decisions are clear, while maintaining project context and decisions. |
 | `to-spec`         | Turn settled project discussion into a local and tracker-published specification.                        |
-| `to-tickets`      | Break approved work into small, dependency-aware implementation tickets.                                 |
+| `to-tickets`      | Break approved work into a main Jira checklist or dependency-aware GitHub Issues.                        |
 | `implement`       | Implement approved specifications or tickets with tests and final review.                                |
 
 ### Design And Planning
@@ -39,7 +39,7 @@ documentation for its installation and configuration steps.
 | `grilling`                      | Stress-test an idea, plan, or design by resolving its open decisions.                        |
 | `grill-me`                      | Relentless interview to sharpen a plan or design, without writing project artifacts.         |
 | `prototype`                     | Throwaway prototype that answers a design question about logic, state, or UI.                |
-| `wayfinder`                     | Map a large, uncertain project as decision tickets before implementation begins.             |
+| `wayfinder`                     | Map uncertain work as decisions in a main Jira checklist or GitHub Issues.                   |
 | `domain-modeling`               | Clarify and record project terminology, facts, and durable design decisions.                 |
 | `codebase-design`               | Design deeper module boundaries, interfaces, seams, and test strategies.                     |
 
@@ -49,7 +49,7 @@ documentation for its installation and configuration steps.
 | -------------------- | ------------------------------------------------------------------------------------------ |
 | `tdd`                | Build or fix code through a red-green-refactor testing loop.                               |
 | `code-review`        | Review a branch, pull request, or working diff against project requirements and standards. |
-| `triage-pr-feedback` | Validate PR review feedback, fix valid findings, and resolve review threads.               |
+| `triage-pr-feedback` | Table PR findings for approval, then fix, verify, commit, push, and resolve review threads. |
 | `wizard`             | Walk a human through a manual procedure only they can perform.                             |
 
 ### Documentation And Communication
@@ -57,7 +57,7 @@ documentation for its installation and configuration steps.
 | Skill              | Use case                                                                                       |
 | ------------------ | ---------------------------------------------------------------------------------------------- |
 | `to-confluence`    | Turn project knowledge into a concise, standalone Confluence page.                             |
-| `update-ticket`    | Draft a meaningful Jira or GitHub progress update for approval before posting.                 |
+| `update-ticket`    | Check completed Jira tasks automatically; draft other tracker updates for approval.           |
 | `unslop`           | Edit documentation, tickets, or other reader-facing prose to be direct, natural, and specific. |
 | `research`         | Investigate a question against primary sources and write cited findings.                       |
 | `to-questionnaire` | Turn a decision only someone else can answer into a questionnaire for them.                    |

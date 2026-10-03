@@ -10,8 +10,10 @@ Investigate a question against **primary sources** and capture the findings as a
 project artifact. Dispatch the investigation to a background agent when the harness
 can; otherwise research in this session.
 
-Resolve every `.agents/projects/` path from the repository root; never read or write
-project artifacts in a global agent-installation directory.
+Resolve every `.agents/projects/` path from the opened workspace root, including
+when the active repository is nested inside it. In a single-repository workspace,
+that is the repository root. Keep this artifact root fixed when changing directories;
+never use nested repositories or global agent-installation directories for artifacts.
 
 ## Process
 

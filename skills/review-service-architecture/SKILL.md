@@ -29,7 +29,10 @@ invocation identifies LightningPay, read `LIGHTNINGPAY.md` for its service-lands
 review map. Those references guide discovery; verify their relevance in the service
 instead of assuming every integration exists.
 
-Resolve every `.agents/projects/` path from the service repository root.
+Resolve every `.agents/projects/` path from the opened workspace root, even when the
+service repository is nested inside it. In a single-repository workspace, use the
+repository root. Keep this root fixed when changing directories; never use nested
+repositories or global agent-installation directories for artifacts.
 
 ## Process
 
