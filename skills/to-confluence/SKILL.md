@@ -53,7 +53,7 @@ never use nested repositories or global agent-installation directories for artif
    limitation are recorded.
 
 5. Update `.agents/projects/<project>/LINKS.md` and `CONTEXT.md` with the Confluence page URL,
-   title, and purpose. Do not append `Written by Cursor`; that convention applies to
+   title, and purpose. Do not append `Written by AI Agent`; that convention applies to
    conversational tracker comments, not documentation.
 
    Done when project context links to the published documentation.

@@ -56,7 +56,7 @@ verification still govern it.
    End the proposed tracker comment with the exact line:
 
    ```text
-   Written by Cursor
+   Written by AI Agent
    ```
 
    Done when the proposed update contains no unsupported completion claim or metadata

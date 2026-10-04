@@ -60,7 +60,7 @@ never use nested repositories or global agent-installation directories for artif
    dependency status, and next frontier. As each Jira task completes and its required
    verification passes, use `update-ticket` to check its item in the main ticket;
    this completion update needs no further approval.
-   Append `Written by Cursor` to any agent-authored Jira or GitHub comment, but not
+   Append `Written by AI Agent` to any agent-authored Jira or GitHub comment, but not
    ticket descriptions or local documentation.
 
    Done when project artifacts point to the published ticket set and its current

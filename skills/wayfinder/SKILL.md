@@ -144,7 +144,7 @@ Resolve no more than one non-research ticket per session.
    Issue. Draft the resolution comment and any other description edits for approval:
    put the resolution beside the Jira item or in its GitHub Issue and add a linked
    one-line gist to the map's **Decisions So Far**. Post only approved edits, ending
-   comments with `Written by Cursor`. Mirror the published outcome locally; keep any
+   comments with `Written by AI Agent`. Mirror the published outcome locally; keep any
    pending description or comment updates identified until approved and posted.
 
    Done when the Jira checklist item is checked or the GitHub Issue is closed, and

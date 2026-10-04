@@ -44,7 +44,7 @@ never use nested repositories or global agent-installation directories for artif
    links. If posting a Jira or GitHub comment, end it with the exact line:
 
    ```text
-   Written by Cursor
+   Written by AI Agent
    ```
 
    Done when the project state accurately reflects the implementation result.

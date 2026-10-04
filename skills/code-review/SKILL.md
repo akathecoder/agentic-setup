@@ -58,7 +58,7 @@ never use nested repositories or global agent-installation directories for artif
 
 5. Write `.agents/projects/<project>/review.md` with `## Standards` and `## Spec` sections.
    Do not merge or rerank their findings. End with the number of findings and worst
-   issue within each axis. If a tracker comment is needed, append `Written by Cursor`;
+   issue within each axis. If a tracker comment is needed, append `Written by AI Agent`;
    do not add that line to the local review document.
 
    Done when the project has a two-axis review report and the user can distinguish

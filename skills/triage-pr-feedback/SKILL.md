@@ -103,7 +103,7 @@ never use nested repositories or global agent-installation directories for artif
    End every GitHub reply with the exact line:
 
    ```text
-   Written by Cursor
+   Written by AI Agent
    ```
 
    Resolve a fixed finding only after its verified fix has been pushed and its reply

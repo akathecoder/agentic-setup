@@ -55,7 +55,7 @@ never use nested repositories or global agent-installation directories for artif
    or GitHub Issues when the user requested it or Jira is unavailable. Use available
    authenticated tooling; otherwise produce a ready-to-paste version and record the
    limitation. Update `CONTEXT.md` and `LINKS.md` with the tracker identifier and URL.
-   Add `Written by Cursor` only if publishing also creates a conversational comment.
+   Add `Written by AI Agent` only if publishing also creates a conversational comment.
 
    Done when both the local spec and its tracker representation are available, or the
    ready-to-paste fallback and limitation are recorded.
